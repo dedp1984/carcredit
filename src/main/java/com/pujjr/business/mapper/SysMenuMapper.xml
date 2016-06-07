@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.SysMenu" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="menuname" property="menuname" jdbcType="VARCHAR" />
+    <result column="iconclass" property="iconclass" jdbcType="VARCHAR" />
+    <result column="routepath" property="routepath" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menuname, iconclass, routepath, parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSubMenuList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where 1=1 
+    <if test="parentid!=null and parentid!=''">
+       and  parentid = #{parentid,jdbcType=VARCHAR}
+    </if>
+     order by menuname
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.SysMenu" >
+    insert into sys_menu (id, menuname, iconclass, 
+      routepath, parentid)
+    values (#{id,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, #{iconclass,jdbcType=VARCHAR}, 
+      #{routepath,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.SysMenu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuname != null" >
+        menuname,
+      </if>
+      <if test="iconclass != null" >
+        iconclass,
+      </if>
+      <if test="routepath != null" >
+        routepath,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="menuname != null" >
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null" >
+        #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="routepath != null" >
+        #{routepath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.SysMenu" >
+    update sys_menu
+    <set >
+      <if test="menuname != null" >
+        menuname = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null" >
+        iconclass = #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="routepath != null" >
+        routepath = #{routepath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.SysMenu" >
+    update sys_menu
+    set menuname = #{menuname,jdbcType=VARCHAR},
+      iconclass = #{iconclass,jdbcType=VARCHAR},
+      routepath = #{routepath,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectSubMenuListByAccountIdAndParentMenuId"  resultMap="BaseResultMap">
+  	select distinct sysmenu.id,sysmenu.menuname,sysmenu.iconclass,sysmenu.routepath,sysmenu.parentid 
+	from SYS_MENU sysmenu where sysmenu.id  in 
+	(
+       		select sysrolemenu.menuid from SYS_ROLE_MENU sysrolemenu where sysrolemenu.roleid in 
+       		(
+              		select sysrole.id from SYS_ROLE sysrole where sysrole.id in 
+              		(select sysaccountrole.roleid from SYS_ACCOUNT_ROLE sysaccountrole where sysaccountrole.accountid=#{accountid})
+      		 )
+	)  and sysmenu.parentid=#{parentid} order by sysmenu.id asc
+  </select>
+  <select  id="selectAuthMenusByAccountId"  resultMap="BaseResultMap">
+      select distinct sysmenu.id,sysmenu.menuname,sysmenu.iconclass,sysmenu.routepath,sysmenu.parentid 
+	from SYS_MENU sysmenu where sysmenu.id  in 
+	(
+       		select sysrolemenu.menuid from SYS_ROLE_MENU sysrolemenu where sysrolemenu.roleid in 
+       		(
+              		select sysrole.id from SYS_ROLE sysrole where sysrole.id in 
+              		(select sysaccountrole.roleid from SYS_ACCOUNT_ROLE sysaccountrole where sysaccountrole.accountid=#{accountid})
+      		 )
+	)   order by sysmenu.routepath asc
+  </select>
+</mapper>

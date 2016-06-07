@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.Product" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="productseq" property="productseq" jdbcType="VARCHAR" />
+    <result column="rate" property="rate" jdbcType="DOUBLE" />
+    <result column="periods" property="periods" jdbcType="INTEGER" />
+    <result column="charge" property="charge" jdbcType="DOUBLE" />
+    <result column="yhk" property="yhk" jdbcType="DOUBLE" />
+    <result column="reserver1" property="reserver1" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pujjr.business.domain.Product" extends="BaseResultMap" >
+    <result column="reserver2" property="reserver2" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getProductNames" resultType="hashMap">
+      select productname as id ,productname as value 
+      from t_product  
+      group by productname
+  </select>
+  <select id="getProductSeqs" resultType="hashMap">
+      select productseq as id , productseq as value ,rate as rate
+      from t_product 
+      where 1=1 and 
+      productname=#{productName} 
+      group by  productseq
+  </select>
+  <select id="getProductPeriods" resultType="hashMap">
+      select periods as id ,periods as value
+      from t_product 
+      where 1=1 and 
+      productname=#{productName} 
+      and productseq=#{productSeq} 
+      group by periods
+  </select>
+  <select id="getProduct" resultMap="ResultMapWithBLOBs">
+      select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where 1=1 
+    and productname=#{productName} 
+    and productseq=#{productSeq} 
+    and periods=#{periods}
+  </select>
+  <sql id="Base_Column_List" >
+    id, productname, productseq, rate, periods, charge, yhk, reserver1
+  </sql>
+  <sql id="Blob_Column_List" >
+    reserver2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_product
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.Product" >
+    insert into t_product (id, productname, productseq, 
+      rate, periods, charge, 
+      yhk, reserver1, reserver2
+      )
+    values (#{id,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{productseq,jdbcType=VARCHAR}, 
+      #{rate,jdbcType=DOUBLE}, #{periods,jdbcType=INTEGER}, #{charge,jdbcType=DOUBLE}, 
+      #{yhk,jdbcType=DOUBLE}, #{reserver1,jdbcType=VARCHAR}, #{reserver2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.Product" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="productseq != null" >
+        productseq,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="periods != null" >
+        periods,
+      </if>
+      <if test="charge != null" >
+        charge,
+      </if>
+      <if test="yhk != null" >
+        yhk,
+      </if>
+      <if test="reserver1 != null" >
+        reserver1,
+      </if>
+      <if test="reserver2 != null" >
+        reserver2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productseq != null" >
+        #{productseq,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="charge != null" >
+        #{charge,jdbcType=DOUBLE},
+      </if>
+      <if test="yhk != null" >
+        #{yhk,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver1 != null" >
+        #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        #{reserver2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.Product" >
+    update t_product
+    <set >
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productseq != null" >
+        productseq = #{productseq,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="charge != null" >
+        charge = #{charge,jdbcType=DOUBLE},
+      </if>
+      <if test="yhk != null" >
+        yhk = #{yhk,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver1 != null" >
+        reserver1 = #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        reserver2 = #{reserver2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pujjr.business.domain.Product" >
+    update t_product
+    set productname = #{productname,jdbcType=VARCHAR},
+      productseq = #{productseq,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE},
+      periods = #{periods,jdbcType=INTEGER},
+      charge = #{charge,jdbcType=DOUBLE},
+      yhk = #{yhk,jdbcType=DOUBLE},
+      reserver1 = #{reserver1,jdbcType=VARCHAR},
+      reserver2 = #{reserver2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.Product" >
+    update t_product
+    set productname = #{productname,jdbcType=VARCHAR},
+      productseq = #{productseq,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE},
+      periods = #{periods,jdbcType=INTEGER},
+      charge = #{charge,jdbcType=DOUBLE},
+      yhk = #{yhk,jdbcType=DOUBLE},
+      reserver1 = #{reserver1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

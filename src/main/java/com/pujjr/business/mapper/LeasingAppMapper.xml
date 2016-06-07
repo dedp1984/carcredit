@@ -1,0 +1,1762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pujjr.business.dao.LeasingAppMapper">
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.LeasingApp">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="producttype" jdbcType="VARCHAR" property="producttype" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="jxsid" jdbcType="VARCHAR" property="jxsid" />
+    <result column="lcj" jdbcType="DOUBLE" property="lcj" />
+    <result column="gpsfee" jdbcType="DOUBLE" property="gpsfee" />
+    <result column="gzs" jdbcType="DOUBLE" property="gzs" />
+    <result column="fwf" jdbcType="DOUBLE" property="fwf" />
+    <result column="bxf" jdbcType="DOUBLE" property="bxf" />
+    <result column="ybf" jdbcType="DOUBLE" property="ybf" />
+    <result column="ghf" jdbcType="DOUBLE" property="ghf" />
+    <result column="jzf" jdbcType="DOUBLE" property="jzf" />
+    <result column="rzsxf" jdbcType="DOUBLE" property="rzsxf" />
+    <result column="clyh" jdbcType="BIT" property="clyh" />
+    <result column="ppcx" jdbcType="VARCHAR" property="ppcx" />
+    <result column="clys" jdbcType="VARCHAR" property="clys" />
+    <result column="scs" jdbcType="VARCHAR" property="scs" />
+    <result column="cjh" jdbcType="VARCHAR" property="cjh" />
+    <result column="fdjh" jdbcType="VARCHAR" property="fdjh" />
+    <result column="pgj" jdbcType="DOUBLE" property="pgj" />
+    <result column="bzj" jdbcType="DOUBLE" property="bzj" />
+    <result column="sfbl" jdbcType="DOUBLE" property="sfbl" />
+    <result column="rzje" jdbcType="DOUBLE" property="rzje" />
+    <result column="rzqx" jdbcType="INTEGER" property="rzqx" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idtype" jdbcType="VARCHAR" property="idtype" />
+    <result column="idno" jdbcType="VARCHAR" property="idno" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="xl" jdbcType="VARCHAR" property="xl" />
+    <result column="hyzk" jdbcType="VARCHAR" property="hyzk" />
+    <result column="xxxdz" jdbcType="VARCHAR" property="xxxdz" />
+    <result column="zsqs" jdbcType="VARCHAR" property="zsqs" />
+    <result column="tzr" jdbcType="VARCHAR" property="tzr" />
+    <result column="hjss" jdbcType="VARCHAR" property="hjss" />
+    <result column="jtcy" jdbcType="VARCHAR" property="jtcy" />
+    <result column="lbdsc" jdbcType="VARCHAR" property="lbdsc" />
+    <result column="fcdz1" jdbcType="VARCHAR" property="fcdz1" />
+    <result column="fczt1" jdbcType="VARCHAR" property="fczt1" />
+    <result column="fcdz2" jdbcType="VARCHAR" property="fcdz2" />
+    <result column="fczt2" jdbcType="VARCHAR" property="fczt2" />
+    <result column="ccsl" jdbcType="INTEGER" property="ccsl" />
+    <result column="ccpp" jdbcType="VARCHAR" property="ccpp" />
+    <result column="cczt" jdbcType="VARCHAR" property="cczt" />
+    <result column="czr1dwmc" jdbcType="VARCHAR" property="czr1dwmc" />
+    <result column="czr1dwlx" jdbcType="VARCHAR" property="czr1dwlx" />
+    <result column="czr1sshy" jdbcType="VARCHAR" property="czr1sshy" />
+    <result column="czr1dwdh" jdbcType="VARCHAR" property="czr1dwdh" />
+    <result column="czr1zj" jdbcType="VARCHAR" property="czr1zj" />
+    <result column="czr1zwmc" jdbcType="VARCHAR" property="czr1zwmc" />
+    <result column="czr1dwdz" jdbcType="VARCHAR" property="czr1dwdz" />
+    <result column="czr1ysr" jdbcType="DOUBLE" property="czr1ysr" />
+    <result column="czr1nsr" jdbcType="DOUBLE" property="czr1nsr" />
+    <result column="poname" jdbcType="VARCHAR" property="poname" />
+    <result column="poidtype" jdbcType="VARCHAR" property="poidtype" />
+    <result column="poidno" jdbcType="VARCHAR" property="poidno" />
+    <result column="pomobile" jdbcType="VARCHAR" property="pomobile" />
+    <result column="poqq" jdbcType="VARCHAR" property="poqq" />
+    <result column="poweixin" jdbcType="VARCHAR" property="poweixin" />
+    <result column="podwmc" jdbcType="VARCHAR" property="podwmc" />
+    <result column="podwlx" jdbcType="VARCHAR" property="podwlx" />
+    <result column="posshy" jdbcType="VARCHAR" property="posshy" />
+    <result column="podwdh" jdbcType="VARCHAR" property="podwdh" />
+    <result column="pozj" jdbcType="VARCHAR" property="pozj" />
+    <result column="pozwmc" jdbcType="VARCHAR" property="pozwmc" />
+    <result column="podwdz" jdbcType="VARCHAR" property="podwdz" />
+    <result column="poysr" jdbcType="DOUBLE" property="poysr" />
+    <result column="ponsr" jdbcType="DOUBLE" property="ponsr" />
+    <result column="czr2lx" jdbcType="VARCHAR" property="czr2lx" />
+    <result column="czr2name" jdbcType="VARCHAR" property="czr2name" />
+    <result column="czr2idtype" jdbcType="VARCHAR" property="czr2idtype" />
+    <result column="czr2idno" jdbcType="VARCHAR" property="czr2idno" />
+    <result column="czr2mobile" jdbcType="VARCHAR" property="czr2mobile" />
+    <result column="czr2qq" jdbcType="VARCHAR" property="czr2qq" />
+    <result column="czr2weixin" jdbcType="VARCHAR" property="czr2weixin" />
+    <result column="czr2brgx" jdbcType="VARCHAR" property="czr2brgx" />
+    <result column="czr2dwmc" jdbcType="VARCHAR" property="czr2dwmc" />
+    <result column="czr2dwlx" jdbcType="VARCHAR" property="czr2dwlx" />
+    <result column="czr2sshy" jdbcType="VARCHAR" property="czr2sshy" />
+    <result column="czr2dwdh" jdbcType="VARCHAR" property="czr2dwdh" />
+    <result column="czr2zj" jdbcType="VARCHAR" property="czr2zj" />
+    <result column="czr2zwmc" jdbcType="VARCHAR" property="czr2zwmc" />
+    <result column="czr2dwdz" jdbcType="VARCHAR" property="czr2dwdz" />
+    <result column="czr2ysr" jdbcType="DOUBLE" property="czr2ysr" />
+    <result column="czr2nsr" jdbcType="DOUBLE" property="czr2nsr" />
+    <result column="lxr1name" jdbcType="VARCHAR" property="lxr1name" />
+    <result column="lxr1mobile" jdbcType="VARCHAR" property="lxr1mobile" />
+    <result column="lxr1gx" jdbcType="VARCHAR" property="lxr1gx" />
+    <result column="lxr1dz" jdbcType="VARCHAR" property="lxr1dz" />
+    <result column="lxr1sfzdgc" jdbcType="VARCHAR" property="lxr1sfzdgc" />
+    <result column="lxr2name" jdbcType="VARCHAR" property="lxr2name" />
+    <result column="lxr2mobile" jdbcType="VARCHAR" property="lxr2mobile" />
+    <result column="lxr2gx" jdbcType="VARCHAR" property="lxr2gx" />
+    <result column="lxr2dz" jdbcType="VARCHAR" property="lxr2dz" />
+    <result column="lxr2sfzdgc" jdbcType="VARCHAR" property="lxr2sfzdgc" />
+    <result column="jtfzyhqkje" jdbcType="DOUBLE" property="jtfzyhqkje" />
+    <result column="jtfzyhdqkhk" jdbcType="DOUBLE" property="jtfzyhdqkhk" />
+    <result column="jtfzp2pqkje" jdbcType="DOUBLE" property="jtfzp2pqkje" />
+    <result column="jtfzp2pqkyhk" jdbcType="DOUBLE" property="jtfzp2pqkyhk" />
+    <result column="jtfzdbqkje" jdbcType="DOUBLE" property="jtfzdbqkje" />
+    <result column="jtfzdbqkyhk" jdbcType="DOUBLE" property="jtfzdbqkyhk" />
+    <result column="jtfzxykqkje" jdbcType="DOUBLE" property="jtfzxykqkje" />
+    <result column="jtfzxykqkyhk" jdbcType="DOUBLE" property="jtfzxykqkyhk" />
+    <result column="jtfzqqqkje" jdbcType="DOUBLE" property="jtfzqqqkje" />
+    <result column="jtfzqqqkyhk" jdbcType="DOUBLE" property="jtfzqqqkyhk" />
+    <result column="jtfzpyqkje" jdbcType="DOUBLE" property="jtfzpyqkje" />
+    <result column="jtfzpyqkyhk" jdbcType="DOUBLE" property="jtfzpyqkyhk" />
+    <result column="jtfzzcgsqkje" jdbcType="DOUBLE" property="jtfzzcgsqkje" />
+    <result column="jtfzzcgsqkyhk" jdbcType="DOUBLE" property="jtfzzcgsqkyhk" />
+    <result column="jtfzze" jdbcType="DOUBLE" property="jtfzze" />
+    <result column="jtfzzhke" jdbcType="DOUBLE" property="jtfzzhke" />
+    <result column="sqdzt" jdbcType="VARCHAR" property="sqdzt" />
+    <result column="sqfqr" jdbcType="VARCHAR" property="sqfqr" />
+    <result column="sqfqsj" jdbcType="TIMESTAMP" property="sqfqsj" />
+    <result column="refundacctno" jdbcType="VARCHAR" property="refundacctno" />
+    <result column="refundbankno" jdbcType="VARCHAR" property="refundbankno" />
+    <result column="contractid" jdbcType="VARCHAR" property="contractid" />
+    <result column="cph" jdbcType="VARCHAR" property="cph" />
+    <result column="confirmdate" jdbcType="VARCHAR" property="confirmdate" />
+    <result column="reserver1" jdbcType="DOUBLE" property="reserver1" />
+    <result column="reserver2" jdbcType="DOUBLE" property="reserver2" />
+    <result column="reserver3" jdbcType="DOUBLE" property="reserver3" />
+    <result column="reserver4" jdbcType="DOUBLE" property="reserver4" />
+    <result column="reserver5" jdbcType="VARCHAR" property="reserver5" />
+    <result column="reserver6" jdbcType="VARCHAR" property="reserver6" />
+    <result column="reserver7" jdbcType="VARCHAR" property="reserver7" />
+    <result column="reserver8" jdbcType="BIT" property="reserver8" />
+    <result column="reserver9" jdbcType="VARCHAR" property="reserver9" />
+    <result column="reserver10" jdbcType="VARCHAR" property="reserver10" />
+ 	<association column="jxsid" property="sysBranch" select="selectAppBranch" />
+  </resultMap>
+  <resultMap id="AppManagerDetailResultMap" type="com.pujjr.business.vo.AppManageDetail">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="custType" jdbcType="VARCHAR" property="custType" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idno" jdbcType="VARCHAR" property="idno" />
+    <result column="shr" jdbcType="VARCHAR" property="shr" />
+    <result column="shsj" jdbcType="VARCHAR" property="shsj" />
+    <result column="rzje" jdbcType="DOUBLE" property="rzje" />
+    <result column="rzqx" jdbcType="INTEGER" property="rzqx" />
+    <result column="sfbl" jdbcType="DOUBLE" property="sfbl" />
+    <result column="sqdzt" jdbcType="VARCHAR" property="sqdzt" />
+    <result column="fkrq"  jdbcType="VARCHAR" property="fkrq"/>
+  </resultMap>
+  <select id="selectManagerAppDetail" resultMap="AppManagerDetailResultMap">
+       select app.id as id ,
+			 app.reserver5 as custType ,
+			 app.name as name,
+			 app.idno as idno ,
+			 checks.shr as shr,
+			 approve.spsj as shsj,
+			 TIMESTAMPDIFF(minute,approve.spsj,app.sqfqsj) as shsc,
+			 app.rzje as rzje,
+			 app.rzqx as rzqx,
+			 app.sfbl as sfbl,
+			 app.sqdzt as sqdzt,
+			 app.reserver7 as fkrq
+			 from t_leasing_app app
+			 left join t_leasing_check checks on app.id=checks.id
+			 left join t_leasing_approve approve on app.id=approve.id
+			 where 1=1 
+		    <if test="sqdzt.size()!=0">
+		        and app.sqdzt in 
+		        <foreach item="item" index="index" collection="sqdzt"
+			      	    open="(" separator="," close=")">
+							#{item}
+				</foreach>
+		    </if>
+		    <if test="id!=null and id!=''">
+		        and app.id like  CONCAT(CONCAT('%',#{id}),'%')
+		    </if>
+		    <if test="name!=null and name!=''">
+		        and app.name like  CONCAT(CONCAT('%',#{name}),'%')
+		    </if>
+		    <if test="sqfqrq!=null and sqfqrq!=''">
+		        and date_format(app.sqfqsj,'%Y-%m-%d')=#{sqfqrq}
+		    </if>
+		    order by sqfqsj desc
+  </select>
+   <resultMap id="SysBranchResultMap" type="com.pujjr.business.domain.SysBranch">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="branchname" jdbcType="VARCHAR" property="branchname" />
+    <result column="areano" jdbcType="VARCHAR" property="areano" />
+    <result column="openbankno" jdbcType="VARCHAR" property="openbankno" />
+    <result column="acctname" jdbcType="VARCHAR" property="acctname" />
+    <result column="openbankname" jdbcType="VARCHAR" property="openbankname" />
+    <result column="branchtel" jdbcType="VARCHAR" property="branchtel" />
+    <result column="branchaddress" jdbcType="VARCHAR" property="branchaddress" />
+    <result column="branchalias" jdbcType="VARCHAR" property="branchalias" />
+    <result column="linkmain" jdbcType="VARCHAR" property="linkmain" />
+    <result column="linktel" jdbcType="VARCHAR" property="linktel" />
+    <result column="zipcode" jdbcType="VARCHAR" property="zipcode" />
+    <result column="manager" jdbcType="VARCHAR" property="manager" />
+    <result column="managertel" jdbcType="VARCHAR" property="managertel" />
+    <result column="createid" jdbcType="VARCHAR" property="createid" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="reserver1" jdbcType="VARCHAR" property="reserver1" />
+    <result column="reserver2" jdbcType="VARCHAR" property="reserver2" />
+  </resultMap>
+  <select id="selectAppBranch" parameterType="String" resultMap="SysBranchResultMap">
+  	select * from SYS_BRANCH where 1=1 and  id=#{jxsid}
+  </select>
+  <sql id="Base_Column_List">
+    id, producttype, productname, jxsid, lcj, gpsfee, gzs, fwf, bxf, ybf, ghf, jzf, rzsxf, 
+    clyh, ppcx, clys, scs, cjh, fdjh, pgj, bzj, sfbl, rzje, rzqx, name, idtype, idno, 
+    mobile, qq, weixin, xl, hyzk, xxxdz, zsqs, tzr, hjss, jtcy, lbdsc, fcdz1, fczt1, 
+    fcdz2, fczt2, ccsl, ccpp, cczt, czr1dwmc, czr1dwlx, czr1sshy, czr1dwdh, czr1zj, czr1zwmc, 
+    czr1dwdz, czr1ysr, czr1nsr, poname, poidtype, poidno, pomobile, poqq, poweixin, podwmc, 
+    podwlx, posshy, podwdh, pozj, pozwmc, podwdz, poysr, ponsr, czr2lx, czr2name, czr2idtype, 
+    czr2idno, czr2mobile, czr2qq, czr2weixin, czr2brgx, czr2dwmc, czr2dwlx, czr2sshy, 
+    czr2dwdh, czr2zj, czr2zwmc, czr2dwdz, czr2ysr, czr2nsr, lxr1name, lxr1mobile, lxr1gx, 
+    lxr1dz, lxr1sfzdgc, lxr2name, lxr2mobile, lxr2gx, lxr2dz, lxr2sfzdgc, jtfzyhqkje, 
+    jtfzyhdqkhk, jtfzp2pqkje, jtfzp2pqkyhk, jtfzdbqkje, jtfzdbqkyhk, jtfzxykqkje, jtfzxykqkyhk, 
+    jtfzqqqkje, jtfzqqqkyhk, jtfzpyqkje, jtfzpyqkyhk, jtfzzcgsqkje, jtfzzcgsqkyhk, jtfzze, 
+    jtfzzhke, sqdzt, sqfqr, sqfqsj, refundacctno, refundbankno, contractid, cph, confirmdate, 
+    reserver1, reserver2, reserver3, reserver4, reserver5, reserver6, reserver7, reserver8, 
+    reserver9, reserver10
+  </sql>
+  <select id="selectInCaseList" resultType="hashMap">
+      	select 
+      		a.producttype,
+      		a.productname,
+      		a.ppcx,
+      		a.reserver5,
+      		a.name,
+      		a.idno,
+      		a.sqfqr,
+      		c.shr,
+      		p.spr,
+      		date_format(a.sqfqsj,'%Y-%m-%d') as sqfqsj,
+      		date_format(p.spsj,'%Y-%m-%d') as spsj,
+      		a.rzje,
+      		a.gpsfee,
+      		a.fwf,
+      		a.gzs,
+      		a.rzqx,
+      		a.sfbl/100 as sfbl,
+      		prod.rate/100 as rate,
+      		a.sqdzt,
+      		prod.yhk as wyyhk
+		from t_leasing_app a
+
+		left join t_leasing_check c on a.id=c.id
+
+		left join t_leasing_approve p on a.id=p.id
+
+		left join t_product prod on prod.productname=a.producttype and prod.productseq=a.productname and prod.periods=a.rzqx
+		
+		where 1=1
+		
+		<if test="sqdzt.size()!=0">
+		        and a.sqdzt in 
+		        <foreach item="item" index="index" collection="sqdzt"
+			      	    open="(" separator="," close=")">
+							#{item}
+				</foreach>
+		 </if>
+		 <if test="id!=null and id!=''">
+		        and a.id like  CONCAT(CONCAT('%',#{id}),'%')
+		 </if>
+		 <if test="name!=null and name!=''">
+		        and a.name like  CONCAT(CONCAT('%',#{name}),'%')
+		 </if>
+		 <if test="sqfqrq!=null and sqfqrq!=''">
+		        and date_format(a.sqfqsj,'%Y-%m-%d')=#{sqfqrq}
+		 </if>
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_leasing_app
+    where 1=1 
+    <if test="sqdzt.size()!=0">
+        and sqdzt in 
+        <foreach item="item" index="index" collection="sqdzt"
+	      	    open="(" separator="," close=")">
+					#{item}
+		</foreach>
+    </if>
+    <if test="id!=null and id!=''">
+        and id like  CONCAT(CONCAT('%',#{id}),'%')
+    </if>
+    <if test="name!=null and name!=''">
+        and name like  CONCAT(CONCAT('%',#{name}),'%')
+    </if>
+    <if test="sqfqrq!=null and sqfqrq!=''">
+        and date_format(sqfqsj,'%Y-%m-%d')=#{sqfqrq}
+    </if>
+    order by sqfqsj desc
+  </select>
+  <select id="selectJxsList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_leasing_app
+    where (1=1 
+    <if test="sqdzt.size()!=0">
+        and sqdzt in 
+        <foreach item="item" index="index" collection="sqdzt"
+	      	    open="(" separator="," close=")">
+					#{item}
+		</foreach>
+    </if>) and (sqfqr=#{sqfqr})
+    <if test="id!=null and id!=''">
+        and id like  CONCAT(CONCAT('%',#{id}),'%')
+    </if>
+    <if test="name!=null and name!=''">
+        and name like  CONCAT(CONCAT('%',#{name}),'%')
+    </if>
+    <if test="sqfqrq!=null and sqfqrq!=''">
+        and date_format(sqfqsj,'%Y-%m-%d')=#{sqfqrq}
+    </if>
+    order by sqfqsj desc
+  </select>
+  <select id="selectCheckList" resultMap="BaseResultMap" >
+    select app.*
+    from t_leasing_app app  
+    left join t_leasing_check ck on ck.id=app.id
+    where ((1=1 
+    <if test="sqdzt.size()!=0">
+        and app.sqdzt in 
+        <foreach item="item" index="index" collection="sqdzt"
+	      	    open="(" separator="," close=")">
+					#{item}
+		</foreach>
+    </if>)
+    or (app.sqdzt='审批退回' and ck.shr=#{shr}) or (app.sqdzt='审核中' and ck.shr=#{shr}))
+    <if test="id!=null and id!=''">
+        and app.id like  CONCAT(CONCAT('%',#{id}),'%')
+    </if>
+    <if test="name!=null and name!=''">
+        and app.name like  CONCAT(CONCAT('%',#{name}),'%')
+    </if>
+    <if test="sqfqrq!=null and sqfqrq!=''">
+        and date_format(app.sqfqsj,'%Y-%m-%d')=#{sqfqrq}
+    </if>
+    order by app.sqfqsj desc
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_leasing_app
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_leasing_app
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.LeasingApp">
+    insert into t_leasing_app (id, producttype, productname, 
+      jxsid, lcj, gpsfee, gzs, 
+      fwf, bxf, ybf, ghf, 
+      jzf, rzsxf, clyh, ppcx, 
+      clys, scs, cjh, fdjh, 
+      pgj, bzj, sfbl, rzje, 
+      rzqx, name, idtype, 
+      idno, mobile, qq, weixin, 
+      xl, hyzk, xxxdz, zsqs, 
+      tzr, hjss, jtcy, lbdsc, 
+      fcdz1, fczt1, fcdz2, 
+      fczt2, ccsl, ccpp, 
+      cczt, czr1dwmc, czr1dwlx, 
+      czr1sshy, czr1dwdh, czr1zj, 
+      czr1zwmc, czr1dwdz, czr1ysr, 
+      czr1nsr, poname, poidtype, 
+      poidno, pomobile, poqq, 
+      poweixin, podwmc, podwlx, 
+      posshy, podwdh, pozj, 
+      pozwmc, podwdz, poysr, 
+      ponsr, czr2lx, czr2name, 
+      czr2idtype, czr2idno, czr2mobile, 
+      czr2qq, czr2weixin, czr2brgx, 
+      czr2dwmc, czr2dwlx, czr2sshy, 
+      czr2dwdh, czr2zj, czr2zwmc, 
+      czr2dwdz, czr2ysr, czr2nsr, 
+      lxr1name, lxr1mobile, lxr1gx, 
+      lxr1dz, lxr1sfzdgc, lxr2name, 
+      lxr2mobile, lxr2gx, lxr2dz, 
+      lxr2sfzdgc, jtfzyhqkje, jtfzyhdqkhk, 
+      jtfzp2pqkje, jtfzp2pqkyhk, jtfzdbqkje, 
+      jtfzdbqkyhk, jtfzxykqkje, jtfzxykqkyhk, 
+      jtfzqqqkje, jtfzqqqkyhk, jtfzpyqkje, 
+      jtfzpyqkyhk, jtfzzcgsqkje, jtfzzcgsqkyhk, 
+      jtfzze, jtfzzhke, sqdzt, 
+      sqfqr, sqfqsj, refundacctno, 
+      refundbankno, contractid, cph, 
+      confirmdate, reserver1, reserver2, 
+      reserver3, reserver4, reserver5, 
+      reserver6, reserver7, reserver8, 
+      reserver9, reserver10)
+    values (#{id,jdbcType=VARCHAR}, #{producttype,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, 
+      #{jxsid,jdbcType=VARCHAR}, #{lcj,jdbcType=DOUBLE}, #{gpsfee,jdbcType=DOUBLE}, #{gzs,jdbcType=DOUBLE}, 
+      #{fwf,jdbcType=DOUBLE}, #{bxf,jdbcType=DOUBLE}, #{ybf,jdbcType=DOUBLE}, #{ghf,jdbcType=DOUBLE}, 
+      #{jzf,jdbcType=DOUBLE}, #{rzsxf,jdbcType=DOUBLE}, #{clyh,jdbcType=BIT}, #{ppcx,jdbcType=VARCHAR}, 
+      #{clys,jdbcType=VARCHAR}, #{scs,jdbcType=VARCHAR}, #{cjh,jdbcType=VARCHAR}, #{fdjh,jdbcType=VARCHAR}, 
+      #{pgj,jdbcType=DOUBLE}, #{bzj,jdbcType=DOUBLE}, #{sfbl,jdbcType=DOUBLE}, #{rzje,jdbcType=DOUBLE}, 
+      #{rzqx,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{idtype,jdbcType=VARCHAR}, 
+      #{idno,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
+      #{xl,jdbcType=VARCHAR}, #{hyzk,jdbcType=VARCHAR}, #{xxxdz,jdbcType=VARCHAR}, #{zsqs,jdbcType=VARCHAR}, 
+      #{tzr,jdbcType=VARCHAR}, #{hjss,jdbcType=VARCHAR}, #{jtcy,jdbcType=VARCHAR}, #{lbdsc,jdbcType=VARCHAR}, 
+      #{fcdz1,jdbcType=VARCHAR}, #{fczt1,jdbcType=VARCHAR}, #{fcdz2,jdbcType=VARCHAR}, 
+      #{fczt2,jdbcType=VARCHAR}, #{ccsl,jdbcType=INTEGER}, #{ccpp,jdbcType=VARCHAR}, 
+      #{cczt,jdbcType=VARCHAR}, #{czr1dwmc,jdbcType=VARCHAR}, #{czr1dwlx,jdbcType=VARCHAR}, 
+      #{czr1sshy,jdbcType=VARCHAR}, #{czr1dwdh,jdbcType=VARCHAR}, #{czr1zj,jdbcType=VARCHAR}, 
+      #{czr1zwmc,jdbcType=VARCHAR}, #{czr1dwdz,jdbcType=VARCHAR}, #{czr1ysr,jdbcType=DOUBLE}, 
+      #{czr1nsr,jdbcType=DOUBLE}, #{poname,jdbcType=VARCHAR}, #{poidtype,jdbcType=VARCHAR}, 
+      #{poidno,jdbcType=VARCHAR}, #{pomobile,jdbcType=VARCHAR}, #{poqq,jdbcType=VARCHAR}, 
+      #{poweixin,jdbcType=VARCHAR}, #{podwmc,jdbcType=VARCHAR}, #{podwlx,jdbcType=VARCHAR}, 
+      #{posshy,jdbcType=VARCHAR}, #{podwdh,jdbcType=VARCHAR}, #{pozj,jdbcType=VARCHAR}, 
+      #{pozwmc,jdbcType=VARCHAR}, #{podwdz,jdbcType=VARCHAR}, #{poysr,jdbcType=DOUBLE}, 
+      #{ponsr,jdbcType=DOUBLE}, #{czr2lx,jdbcType=VARCHAR}, #{czr2name,jdbcType=VARCHAR}, 
+      #{czr2idtype,jdbcType=VARCHAR}, #{czr2idno,jdbcType=VARCHAR}, #{czr2mobile,jdbcType=VARCHAR}, 
+      #{czr2qq,jdbcType=VARCHAR}, #{czr2weixin,jdbcType=VARCHAR}, #{czr2brgx,jdbcType=VARCHAR}, 
+      #{czr2dwmc,jdbcType=VARCHAR}, #{czr2dwlx,jdbcType=VARCHAR}, #{czr2sshy,jdbcType=VARCHAR}, 
+      #{czr2dwdh,jdbcType=VARCHAR}, #{czr2zj,jdbcType=VARCHAR}, #{czr2zwmc,jdbcType=VARCHAR}, 
+      #{czr2dwdz,jdbcType=VARCHAR}, #{czr2ysr,jdbcType=DOUBLE}, #{czr2nsr,jdbcType=DOUBLE}, 
+      #{lxr1name,jdbcType=VARCHAR}, #{lxr1mobile,jdbcType=VARCHAR}, #{lxr1gx,jdbcType=VARCHAR}, 
+      #{lxr1dz,jdbcType=VARCHAR}, #{lxr1sfzdgc,jdbcType=VARCHAR}, #{lxr2name,jdbcType=VARCHAR}, 
+      #{lxr2mobile,jdbcType=VARCHAR}, #{lxr2gx,jdbcType=VARCHAR}, #{lxr2dz,jdbcType=VARCHAR}, 
+      #{lxr2sfzdgc,jdbcType=VARCHAR}, #{jtfzyhqkje,jdbcType=DOUBLE}, #{jtfzyhdqkhk,jdbcType=DOUBLE}, 
+      #{jtfzp2pqkje,jdbcType=DOUBLE}, #{jtfzp2pqkyhk,jdbcType=DOUBLE}, #{jtfzdbqkje,jdbcType=DOUBLE}, 
+      #{jtfzdbqkyhk,jdbcType=DOUBLE}, #{jtfzxykqkje,jdbcType=DOUBLE}, #{jtfzxykqkyhk,jdbcType=DOUBLE}, 
+      #{jtfzqqqkje,jdbcType=DOUBLE}, #{jtfzqqqkyhk,jdbcType=DOUBLE}, #{jtfzpyqkje,jdbcType=DOUBLE}, 
+      #{jtfzpyqkyhk,jdbcType=DOUBLE}, #{jtfzzcgsqkje,jdbcType=DOUBLE}, #{jtfzzcgsqkyhk,jdbcType=DOUBLE}, 
+      #{jtfzze,jdbcType=DOUBLE}, #{jtfzzhke,jdbcType=DOUBLE}, #{sqdzt,jdbcType=VARCHAR}, 
+      #{sqfqr,jdbcType=VARCHAR}, #{sqfqsj,jdbcType=TIMESTAMP}, #{refundacctno,jdbcType=VARCHAR}, 
+      #{refundbankno,jdbcType=VARCHAR}, #{contractid,jdbcType=VARCHAR}, #{cph,jdbcType=VARCHAR}, 
+      #{confirmdate,jdbcType=VARCHAR}, #{reserver1,jdbcType=DOUBLE}, #{reserver2,jdbcType=DOUBLE}, 
+      #{reserver3,jdbcType=DOUBLE}, #{reserver4,jdbcType=DOUBLE}, #{reserver5,jdbcType=VARCHAR}, 
+      #{reserver6,jdbcType=VARCHAR}, #{reserver7,jdbcType=VARCHAR}, #{reserver8,jdbcType=BIT}, 
+      #{reserver9,jdbcType=VARCHAR}, #{reserver10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.LeasingApp">
+    insert into t_leasing_app
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="producttype != null">
+        producttype,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="jxsid != null">
+        jxsid,
+      </if>
+      <if test="lcj != null">
+        lcj,
+      </if>
+      <if test="gpsfee != null">
+        gpsfee,
+      </if>
+      <if test="gzs != null">
+        gzs,
+      </if>
+      <if test="fwf != null">
+        fwf,
+      </if>
+      <if test="bxf != null">
+        bxf,
+      </if>
+      <if test="ybf != null">
+        ybf,
+      </if>
+      <if test="ghf != null">
+        ghf,
+      </if>
+      <if test="jzf != null">
+        jzf,
+      </if>
+      <if test="rzsxf != null">
+        rzsxf,
+      </if>
+      <if test="clyh != null">
+        clyh,
+      </if>
+      <if test="ppcx != null">
+        ppcx,
+      </if>
+      <if test="clys != null">
+        clys,
+      </if>
+      <if test="scs != null">
+        scs,
+      </if>
+      <if test="cjh != null">
+        cjh,
+      </if>
+      <if test="fdjh != null">
+        fdjh,
+      </if>
+      <if test="pgj != null">
+        pgj,
+      </if>
+      <if test="bzj != null">
+        bzj,
+      </if>
+      <if test="sfbl != null">
+        sfbl,
+      </if>
+      <if test="rzje != null">
+        rzje,
+      </if>
+      <if test="rzqx != null">
+        rzqx,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idtype != null">
+        idtype,
+      </if>
+      <if test="idno != null">
+        idno,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="weixin != null">
+        weixin,
+      </if>
+      <if test="xl != null">
+        xl,
+      </if>
+      <if test="hyzk != null">
+        hyzk,
+      </if>
+      <if test="xxxdz != null">
+        xxxdz,
+      </if>
+      <if test="zsqs != null">
+        zsqs,
+      </if>
+      <if test="tzr != null">
+        tzr,
+      </if>
+      <if test="hjss != null">
+        hjss,
+      </if>
+      <if test="jtcy != null">
+        jtcy,
+      </if>
+      <if test="lbdsc != null">
+        lbdsc,
+      </if>
+      <if test="fcdz1 != null">
+        fcdz1,
+      </if>
+      <if test="fczt1 != null">
+        fczt1,
+      </if>
+      <if test="fcdz2 != null">
+        fcdz2,
+      </if>
+      <if test="fczt2 != null">
+        fczt2,
+      </if>
+      <if test="ccsl != null">
+        ccsl,
+      </if>
+      <if test="ccpp != null">
+        ccpp,
+      </if>
+      <if test="cczt != null">
+        cczt,
+      </if>
+      <if test="czr1dwmc != null">
+        czr1dwmc,
+      </if>
+      <if test="czr1dwlx != null">
+        czr1dwlx,
+      </if>
+      <if test="czr1sshy != null">
+        czr1sshy,
+      </if>
+      <if test="czr1dwdh != null">
+        czr1dwdh,
+      </if>
+      <if test="czr1zj != null">
+        czr1zj,
+      </if>
+      <if test="czr1zwmc != null">
+        czr1zwmc,
+      </if>
+      <if test="czr1dwdz != null">
+        czr1dwdz,
+      </if>
+      <if test="czr1ysr != null">
+        czr1ysr,
+      </if>
+      <if test="czr1nsr != null">
+        czr1nsr,
+      </if>
+      <if test="poname != null">
+        poname,
+      </if>
+      <if test="poidtype != null">
+        poidtype,
+      </if>
+      <if test="poidno != null">
+        poidno,
+      </if>
+      <if test="pomobile != null">
+        pomobile,
+      </if>
+      <if test="poqq != null">
+        poqq,
+      </if>
+      <if test="poweixin != null">
+        poweixin,
+      </if>
+      <if test="podwmc != null">
+        podwmc,
+      </if>
+      <if test="podwlx != null">
+        podwlx,
+      </if>
+      <if test="posshy != null">
+        posshy,
+      </if>
+      <if test="podwdh != null">
+        podwdh,
+      </if>
+      <if test="pozj != null">
+        pozj,
+      </if>
+      <if test="pozwmc != null">
+        pozwmc,
+      </if>
+      <if test="podwdz != null">
+        podwdz,
+      </if>
+      <if test="poysr != null">
+        poysr,
+      </if>
+      <if test="ponsr != null">
+        ponsr,
+      </if>
+      <if test="czr2lx != null">
+        czr2lx,
+      </if>
+      <if test="czr2name != null">
+        czr2name,
+      </if>
+      <if test="czr2idtype != null">
+        czr2idtype,
+      </if>
+      <if test="czr2idno != null">
+        czr2idno,
+      </if>
+      <if test="czr2mobile != null">
+        czr2mobile,
+      </if>
+      <if test="czr2qq != null">
+        czr2qq,
+      </if>
+      <if test="czr2weixin != null">
+        czr2weixin,
+      </if>
+      <if test="czr2brgx != null">
+        czr2brgx,
+      </if>
+      <if test="czr2dwmc != null">
+        czr2dwmc,
+      </if>
+      <if test="czr2dwlx != null">
+        czr2dwlx,
+      </if>
+      <if test="czr2sshy != null">
+        czr2sshy,
+      </if>
+      <if test="czr2dwdh != null">
+        czr2dwdh,
+      </if>
+      <if test="czr2zj != null">
+        czr2zj,
+      </if>
+      <if test="czr2zwmc != null">
+        czr2zwmc,
+      </if>
+      <if test="czr2dwdz != null">
+        czr2dwdz,
+      </if>
+      <if test="czr2ysr != null">
+        czr2ysr,
+      </if>
+      <if test="czr2nsr != null">
+        czr2nsr,
+      </if>
+      <if test="lxr1name != null">
+        lxr1name,
+      </if>
+      <if test="lxr1mobile != null">
+        lxr1mobile,
+      </if>
+      <if test="lxr1gx != null">
+        lxr1gx,
+      </if>
+      <if test="lxr1dz != null">
+        lxr1dz,
+      </if>
+      <if test="lxr1sfzdgc != null">
+        lxr1sfzdgc,
+      </if>
+      <if test="lxr2name != null">
+        lxr2name,
+      </if>
+      <if test="lxr2mobile != null">
+        lxr2mobile,
+      </if>
+      <if test="lxr2gx != null">
+        lxr2gx,
+      </if>
+      <if test="lxr2dz != null">
+        lxr2dz,
+      </if>
+      <if test="lxr2sfzdgc != null">
+        lxr2sfzdgc,
+      </if>
+      <if test="jtfzyhqkje != null">
+        jtfzyhqkje,
+      </if>
+      <if test="jtfzyhdqkhk != null">
+        jtfzyhdqkhk,
+      </if>
+      <if test="jtfzp2pqkje != null">
+        jtfzp2pqkje,
+      </if>
+      <if test="jtfzp2pqkyhk != null">
+        jtfzp2pqkyhk,
+      </if>
+      <if test="jtfzdbqkje != null">
+        jtfzdbqkje,
+      </if>
+      <if test="jtfzdbqkyhk != null">
+        jtfzdbqkyhk,
+      </if>
+      <if test="jtfzxykqkje != null">
+        jtfzxykqkje,
+      </if>
+      <if test="jtfzxykqkyhk != null">
+        jtfzxykqkyhk,
+      </if>
+      <if test="jtfzqqqkje != null">
+        jtfzqqqkje,
+      </if>
+      <if test="jtfzqqqkyhk != null">
+        jtfzqqqkyhk,
+      </if>
+      <if test="jtfzpyqkje != null">
+        jtfzpyqkje,
+      </if>
+      <if test="jtfzpyqkyhk != null">
+        jtfzpyqkyhk,
+      </if>
+      <if test="jtfzzcgsqkje != null">
+        jtfzzcgsqkje,
+      </if>
+      <if test="jtfzzcgsqkyhk != null">
+        jtfzzcgsqkyhk,
+      </if>
+      <if test="jtfzze != null">
+        jtfzze,
+      </if>
+      <if test="jtfzzhke != null">
+        jtfzzhke,
+      </if>
+      <if test="sqdzt != null">
+        sqdzt,
+      </if>
+      <if test="sqfqr != null">
+        sqfqr,
+      </if>
+      <if test="sqfqsj != null">
+        sqfqsj,
+      </if>
+      <if test="refundacctno != null">
+        refundacctno,
+      </if>
+      <if test="refundbankno != null">
+        refundbankno,
+      </if>
+      <if test="contractid != null">
+        contractid,
+      </if>
+      <if test="cph != null">
+        cph,
+      </if>
+      <if test="confirmdate != null">
+        confirmdate,
+      </if>
+      <if test="reserver1 != null">
+        reserver1,
+      </if>
+      <if test="reserver2 != null">
+        reserver2,
+      </if>
+      <if test="reserver3 != null">
+        reserver3,
+      </if>
+      <if test="reserver4 != null">
+        reserver4,
+      </if>
+      <if test="reserver5 != null">
+        reserver5,
+      </if>
+      <if test="reserver6 != null">
+        reserver6,
+      </if>
+      <if test="reserver7 != null">
+        reserver7,
+      </if>
+      <if test="reserver8 != null">
+        reserver8,
+      </if>
+      <if test="reserver9 != null">
+        reserver9,
+      </if>
+      <if test="reserver10 != null">
+        reserver10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null">
+        #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="jxsid != null">
+        #{jxsid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcj != null">
+        #{lcj,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsfee != null">
+        #{gpsfee,jdbcType=DOUBLE},
+      </if>
+      <if test="gzs != null">
+        #{gzs,jdbcType=DOUBLE},
+      </if>
+      <if test="fwf != null">
+        #{fwf,jdbcType=DOUBLE},
+      </if>
+      <if test="bxf != null">
+        #{bxf,jdbcType=DOUBLE},
+      </if>
+      <if test="ybf != null">
+        #{ybf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null">
+        #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="jzf != null">
+        #{jzf,jdbcType=DOUBLE},
+      </if>
+      <if test="rzsxf != null">
+        #{rzsxf,jdbcType=DOUBLE},
+      </if>
+      <if test="clyh != null">
+        #{clyh,jdbcType=BIT},
+      </if>
+      <if test="ppcx != null">
+        #{ppcx,jdbcType=VARCHAR},
+      </if>
+      <if test="clys != null">
+        #{clys,jdbcType=VARCHAR},
+      </if>
+      <if test="scs != null">
+        #{scs,jdbcType=VARCHAR},
+      </if>
+      <if test="cjh != null">
+        #{cjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjh != null">
+        #{fdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="pgj != null">
+        #{pgj,jdbcType=DOUBLE},
+      </if>
+      <if test="bzj != null">
+        #{bzj,jdbcType=DOUBLE},
+      </if>
+      <if test="sfbl != null">
+        #{sfbl,jdbcType=DOUBLE},
+      </if>
+      <if test="rzje != null">
+        #{rzje,jdbcType=DOUBLE},
+      </if>
+      <if test="rzqx != null">
+        #{rzqx,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idtype != null">
+        #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null">
+        #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="xxxdz != null">
+        #{xxxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="zsqs != null">
+        #{zsqs,jdbcType=VARCHAR},
+      </if>
+      <if test="tzr != null">
+        #{tzr,jdbcType=VARCHAR},
+      </if>
+      <if test="hjss != null">
+        #{hjss,jdbcType=VARCHAR},
+      </if>
+      <if test="jtcy != null">
+        #{jtcy,jdbcType=VARCHAR},
+      </if>
+      <if test="lbdsc != null">
+        #{lbdsc,jdbcType=VARCHAR},
+      </if>
+      <if test="fcdz1 != null">
+        #{fcdz1,jdbcType=VARCHAR},
+      </if>
+      <if test="fczt1 != null">
+        #{fczt1,jdbcType=VARCHAR},
+      </if>
+      <if test="fcdz2 != null">
+        #{fcdz2,jdbcType=VARCHAR},
+      </if>
+      <if test="fczt2 != null">
+        #{fczt2,jdbcType=VARCHAR},
+      </if>
+      <if test="ccsl != null">
+        #{ccsl,jdbcType=INTEGER},
+      </if>
+      <if test="ccpp != null">
+        #{ccpp,jdbcType=VARCHAR},
+      </if>
+      <if test="cczt != null">
+        #{cczt,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwmc != null">
+        #{czr1dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwlx != null">
+        #{czr1dwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1sshy != null">
+        #{czr1sshy,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwdh != null">
+        #{czr1dwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1zj != null">
+        #{czr1zj,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1zwmc != null">
+        #{czr1zwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwdz != null">
+        #{czr1dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1ysr != null">
+        #{czr1ysr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr1nsr != null">
+        #{czr1nsr,jdbcType=DOUBLE},
+      </if>
+      <if test="poname != null">
+        #{poname,jdbcType=VARCHAR},
+      </if>
+      <if test="poidtype != null">
+        #{poidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="poidno != null">
+        #{poidno,jdbcType=VARCHAR},
+      </if>
+      <if test="pomobile != null">
+        #{pomobile,jdbcType=VARCHAR},
+      </if>
+      <if test="poqq != null">
+        #{poqq,jdbcType=VARCHAR},
+      </if>
+      <if test="poweixin != null">
+        #{poweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="podwmc != null">
+        #{podwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="podwlx != null">
+        #{podwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="posshy != null">
+        #{posshy,jdbcType=VARCHAR},
+      </if>
+      <if test="podwdh != null">
+        #{podwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="pozj != null">
+        #{pozj,jdbcType=VARCHAR},
+      </if>
+      <if test="pozwmc != null">
+        #{pozwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="podwdz != null">
+        #{podwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="poysr != null">
+        #{poysr,jdbcType=DOUBLE},
+      </if>
+      <if test="ponsr != null">
+        #{ponsr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr2lx != null">
+        #{czr2lx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2name != null">
+        #{czr2name,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2idtype != null">
+        #{czr2idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2idno != null">
+        #{czr2idno,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2mobile != null">
+        #{czr2mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2qq != null">
+        #{czr2qq,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2weixin != null">
+        #{czr2weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2brgx != null">
+        #{czr2brgx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwmc != null">
+        #{czr2dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwlx != null">
+        #{czr2dwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2sshy != null">
+        #{czr2sshy,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwdh != null">
+        #{czr2dwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2zj != null">
+        #{czr2zj,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2zwmc != null">
+        #{czr2zwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwdz != null">
+        #{czr2dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2ysr != null">
+        #{czr2ysr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr2nsr != null">
+        #{czr2nsr,jdbcType=DOUBLE},
+      </if>
+      <if test="lxr1name != null">
+        #{lxr1name,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1mobile != null">
+        #{lxr1mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1gx != null">
+        #{lxr1gx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1dz != null">
+        #{lxr1dz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1sfzdgc != null">
+        #{lxr1sfzdgc,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2name != null">
+        #{lxr2name,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2mobile != null">
+        #{lxr2mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2gx != null">
+        #{lxr2gx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2dz != null">
+        #{lxr2dz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2sfzdgc != null">
+        #{lxr2sfzdgc,jdbcType=VARCHAR},
+      </if>
+      <if test="jtfzyhqkje != null">
+        #{jtfzyhqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzyhdqkhk != null">
+        #{jtfzyhdqkhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzp2pqkje != null">
+        #{jtfzp2pqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzp2pqkyhk != null">
+        #{jtfzp2pqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzdbqkje != null">
+        #{jtfzdbqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzdbqkyhk != null">
+        #{jtfzdbqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzxykqkje != null">
+        #{jtfzxykqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzxykqkyhk != null">
+        #{jtfzxykqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzqqqkje != null">
+        #{jtfzqqqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzqqqkyhk != null">
+        #{jtfzqqqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzpyqkje != null">
+        #{jtfzpyqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzpyqkyhk != null">
+        #{jtfzpyqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzcgsqkje != null">
+        #{jtfzzcgsqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzcgsqkyhk != null">
+        #{jtfzzcgsqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzze != null">
+        #{jtfzze,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzhke != null">
+        #{jtfzzhke,jdbcType=DOUBLE},
+      </if>
+      <if test="sqdzt != null">
+        #{sqdzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqfqr != null">
+        #{sqfqr,jdbcType=VARCHAR},
+      </if>
+      <if test="sqfqsj != null">
+        #{sqfqsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundacctno != null">
+        #{refundacctno,jdbcType=VARCHAR},
+      </if>
+      <if test="refundbankno != null">
+        #{refundbankno,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="cph != null">
+        #{cph,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        #{confirmdate,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver1 != null">
+        #{reserver1,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver2 != null">
+        #{reserver2,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver3 != null">
+        #{reserver3,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver4 != null">
+        #{reserver4,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver5 != null">
+        #{reserver5,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver6 != null">
+        #{reserver6,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver7 != null">
+        #{reserver7,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver8 != null">
+        #{reserver8,jdbcType=BIT},
+      </if>
+      <if test="reserver9 != null">
+        #{reserver9,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver10 != null">
+        #{reserver10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.LeasingApp">
+    update t_leasing_app
+    <set>
+      <if test="producttype != null">
+        producttype = #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="jxsid != null">
+        jxsid = #{jxsid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcj != null">
+        lcj = #{lcj,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsfee != null">
+        gpsfee = #{gpsfee,jdbcType=DOUBLE},
+      </if>
+      <if test="gzs != null">
+        gzs = #{gzs,jdbcType=DOUBLE},
+      </if>
+      <if test="fwf != null">
+        fwf = #{fwf,jdbcType=DOUBLE},
+      </if>
+      <if test="bxf != null">
+        bxf = #{bxf,jdbcType=DOUBLE},
+      </if>
+      <if test="ybf != null">
+        ybf = #{ybf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null">
+        ghf = #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="jzf != null">
+        jzf = #{jzf,jdbcType=DOUBLE},
+      </if>
+      <if test="rzsxf != null">
+        rzsxf = #{rzsxf,jdbcType=DOUBLE},
+      </if>
+      <if test="clyh != null">
+        clyh = #{clyh,jdbcType=BIT},
+      </if>
+      <if test="ppcx != null">
+        ppcx = #{ppcx,jdbcType=VARCHAR},
+      </if>
+      <if test="clys != null">
+        clys = #{clys,jdbcType=VARCHAR},
+      </if>
+      <if test="scs != null">
+        scs = #{scs,jdbcType=VARCHAR},
+      </if>
+      <if test="cjh != null">
+        cjh = #{cjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjh != null">
+        fdjh = #{fdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="pgj != null">
+        pgj = #{pgj,jdbcType=DOUBLE},
+      </if>
+      <if test="bzj != null">
+        bzj = #{bzj,jdbcType=DOUBLE},
+      </if>
+      <if test="sfbl != null">
+        sfbl = #{sfbl,jdbcType=DOUBLE},
+      </if>
+      <if test="rzje != null">
+        rzje = #{rzje,jdbcType=DOUBLE},
+      </if>
+      <if test="rzqx != null">
+        rzqx = #{rzqx,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idtype != null">
+        idtype = #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        idno = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        xl = #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null">
+        hyzk = #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="xxxdz != null">
+        xxxdz = #{xxxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="zsqs != null">
+        zsqs = #{zsqs,jdbcType=VARCHAR},
+      </if>
+      <if test="tzr != null">
+        tzr = #{tzr,jdbcType=VARCHAR},
+      </if>
+      <if test="hjss != null">
+        hjss = #{hjss,jdbcType=VARCHAR},
+      </if>
+      <if test="jtcy != null">
+        jtcy = #{jtcy,jdbcType=VARCHAR},
+      </if>
+      <if test="lbdsc != null">
+        lbdsc = #{lbdsc,jdbcType=VARCHAR},
+      </if>
+      <if test="fcdz1 != null">
+        fcdz1 = #{fcdz1,jdbcType=VARCHAR},
+      </if>
+      <if test="fczt1 != null">
+        fczt1 = #{fczt1,jdbcType=VARCHAR},
+      </if>
+      <if test="fcdz2 != null">
+        fcdz2 = #{fcdz2,jdbcType=VARCHAR},
+      </if>
+      <if test="fczt2 != null">
+        fczt2 = #{fczt2,jdbcType=VARCHAR},
+      </if>
+      <if test="ccsl != null">
+        ccsl = #{ccsl,jdbcType=INTEGER},
+      </if>
+      <if test="ccpp != null">
+        ccpp = #{ccpp,jdbcType=VARCHAR},
+      </if>
+      <if test="cczt != null">
+        cczt = #{cczt,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwmc != null">
+        czr1dwmc = #{czr1dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwlx != null">
+        czr1dwlx = #{czr1dwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1sshy != null">
+        czr1sshy = #{czr1sshy,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwdh != null">
+        czr1dwdh = #{czr1dwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1zj != null">
+        czr1zj = #{czr1zj,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1zwmc != null">
+        czr1zwmc = #{czr1zwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1dwdz != null">
+        czr1dwdz = #{czr1dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr1ysr != null">
+        czr1ysr = #{czr1ysr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr1nsr != null">
+        czr1nsr = #{czr1nsr,jdbcType=DOUBLE},
+      </if>
+      <if test="poname != null">
+        poname = #{poname,jdbcType=VARCHAR},
+      </if>
+      <if test="poidtype != null">
+        poidtype = #{poidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="poidno != null">
+        poidno = #{poidno,jdbcType=VARCHAR},
+      </if>
+      <if test="pomobile != null">
+        pomobile = #{pomobile,jdbcType=VARCHAR},
+      </if>
+      <if test="poqq != null">
+        poqq = #{poqq,jdbcType=VARCHAR},
+      </if>
+      <if test="poweixin != null">
+        poweixin = #{poweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="podwmc != null">
+        podwmc = #{podwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="podwlx != null">
+        podwlx = #{podwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="posshy != null">
+        posshy = #{posshy,jdbcType=VARCHAR},
+      </if>
+      <if test="podwdh != null">
+        podwdh = #{podwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="pozj != null">
+        pozj = #{pozj,jdbcType=VARCHAR},
+      </if>
+      <if test="pozwmc != null">
+        pozwmc = #{pozwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="podwdz != null">
+        podwdz = #{podwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="poysr != null">
+        poysr = #{poysr,jdbcType=DOUBLE},
+      </if>
+      <if test="ponsr != null">
+        ponsr = #{ponsr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr2lx != null">
+        czr2lx = #{czr2lx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2name != null">
+        czr2name = #{czr2name,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2idtype != null">
+        czr2idtype = #{czr2idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2idno != null">
+        czr2idno = #{czr2idno,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2mobile != null">
+        czr2mobile = #{czr2mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2qq != null">
+        czr2qq = #{czr2qq,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2weixin != null">
+        czr2weixin = #{czr2weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2brgx != null">
+        czr2brgx = #{czr2brgx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwmc != null">
+        czr2dwmc = #{czr2dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwlx != null">
+        czr2dwlx = #{czr2dwlx,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2sshy != null">
+        czr2sshy = #{czr2sshy,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwdh != null">
+        czr2dwdh = #{czr2dwdh,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2zj != null">
+        czr2zj = #{czr2zj,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2zwmc != null">
+        czr2zwmc = #{czr2zwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2dwdz != null">
+        czr2dwdz = #{czr2dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="czr2ysr != null">
+        czr2ysr = #{czr2ysr,jdbcType=DOUBLE},
+      </if>
+      <if test="czr2nsr != null">
+        czr2nsr = #{czr2nsr,jdbcType=DOUBLE},
+      </if>
+      <if test="lxr1name != null">
+        lxr1name = #{lxr1name,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1mobile != null">
+        lxr1mobile = #{lxr1mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1gx != null">
+        lxr1gx = #{lxr1gx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1dz != null">
+        lxr1dz = #{lxr1dz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr1sfzdgc != null">
+        lxr1sfzdgc = #{lxr1sfzdgc,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2name != null">
+        lxr2name = #{lxr2name,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2mobile != null">
+        lxr2mobile = #{lxr2mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2gx != null">
+        lxr2gx = #{lxr2gx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2dz != null">
+        lxr2dz = #{lxr2dz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr2sfzdgc != null">
+        lxr2sfzdgc = #{lxr2sfzdgc,jdbcType=VARCHAR},
+      </if>
+      <if test="jtfzyhqkje != null">
+        jtfzyhqkje = #{jtfzyhqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzyhdqkhk != null">
+        jtfzyhdqkhk = #{jtfzyhdqkhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzp2pqkje != null">
+        jtfzp2pqkje = #{jtfzp2pqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzp2pqkyhk != null">
+        jtfzp2pqkyhk = #{jtfzp2pqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzdbqkje != null">
+        jtfzdbqkje = #{jtfzdbqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzdbqkyhk != null">
+        jtfzdbqkyhk = #{jtfzdbqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzxykqkje != null">
+        jtfzxykqkje = #{jtfzxykqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzxykqkyhk != null">
+        jtfzxykqkyhk = #{jtfzxykqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzqqqkje != null">
+        jtfzqqqkje = #{jtfzqqqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzqqqkyhk != null">
+        jtfzqqqkyhk = #{jtfzqqqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzpyqkje != null">
+        jtfzpyqkje = #{jtfzpyqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzpyqkyhk != null">
+        jtfzpyqkyhk = #{jtfzpyqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzcgsqkje != null">
+        jtfzzcgsqkje = #{jtfzzcgsqkje,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzcgsqkyhk != null">
+        jtfzzcgsqkyhk = #{jtfzzcgsqkyhk,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzze != null">
+        jtfzze = #{jtfzze,jdbcType=DOUBLE},
+      </if>
+      <if test="jtfzzhke != null">
+        jtfzzhke = #{jtfzzhke,jdbcType=DOUBLE},
+      </if>
+      <if test="sqdzt != null">
+        sqdzt = #{sqdzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqfqr != null">
+        sqfqr = #{sqfqr,jdbcType=VARCHAR},
+      </if>
+      <if test="sqfqsj != null">
+        sqfqsj = #{sqfqsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundacctno != null">
+        refundacctno = #{refundacctno,jdbcType=VARCHAR},
+      </if>
+      <if test="refundbankno != null">
+        refundbankno = #{refundbankno,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        contractid = #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="cph != null">
+        cph = #{cph,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmdate != null">
+        confirmdate = #{confirmdate,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver1 != null">
+        reserver1 = #{reserver1,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver2 != null">
+        reserver2 = #{reserver2,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver3 != null">
+        reserver3 = #{reserver3,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver4 != null">
+        reserver4 = #{reserver4,jdbcType=DOUBLE},
+      </if>
+      <if test="reserver5 != null">
+        reserver5 = #{reserver5,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver6 != null">
+        reserver6 = #{reserver6,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver7 != null">
+        reserver7 = #{reserver7,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver8 != null">
+        reserver8 = #{reserver8,jdbcType=BIT},
+      </if>
+      <if test="reserver9 != null">
+        reserver9 = #{reserver9,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver10 != null">
+        reserver10 = #{reserver10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.LeasingApp">
+    update t_leasing_app
+    set producttype = #{producttype,jdbcType=VARCHAR},
+      productname = #{productname,jdbcType=VARCHAR},
+      jxsid = #{jxsid,jdbcType=VARCHAR},
+      lcj = #{lcj,jdbcType=DOUBLE},
+      gpsfee = #{gpsfee,jdbcType=DOUBLE},
+      gzs = #{gzs,jdbcType=DOUBLE},
+      fwf = #{fwf,jdbcType=DOUBLE},
+      bxf = #{bxf,jdbcType=DOUBLE},
+      ybf = #{ybf,jdbcType=DOUBLE},
+      ghf = #{ghf,jdbcType=DOUBLE},
+      jzf = #{jzf,jdbcType=DOUBLE},
+      rzsxf = #{rzsxf,jdbcType=DOUBLE},
+      clyh = #{clyh,jdbcType=BIT},
+      ppcx = #{ppcx,jdbcType=VARCHAR},
+      clys = #{clys,jdbcType=VARCHAR},
+      scs = #{scs,jdbcType=VARCHAR},
+      cjh = #{cjh,jdbcType=VARCHAR},
+      fdjh = #{fdjh,jdbcType=VARCHAR},
+      pgj = #{pgj,jdbcType=DOUBLE},
+      bzj = #{bzj,jdbcType=DOUBLE},
+      sfbl = #{sfbl,jdbcType=DOUBLE},
+      rzje = #{rzje,jdbcType=DOUBLE},
+      rzqx = #{rzqx,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      idtype = #{idtype,jdbcType=VARCHAR},
+      idno = #{idno,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      xl = #{xl,jdbcType=VARCHAR},
+      hyzk = #{hyzk,jdbcType=VARCHAR},
+      xxxdz = #{xxxdz,jdbcType=VARCHAR},
+      zsqs = #{zsqs,jdbcType=VARCHAR},
+      tzr = #{tzr,jdbcType=VARCHAR},
+      hjss = #{hjss,jdbcType=VARCHAR},
+      jtcy = #{jtcy,jdbcType=VARCHAR},
+      lbdsc = #{lbdsc,jdbcType=VARCHAR},
+      fcdz1 = #{fcdz1,jdbcType=VARCHAR},
+      fczt1 = #{fczt1,jdbcType=VARCHAR},
+      fcdz2 = #{fcdz2,jdbcType=VARCHAR},
+      fczt2 = #{fczt2,jdbcType=VARCHAR},
+      ccsl = #{ccsl,jdbcType=INTEGER},
+      ccpp = #{ccpp,jdbcType=VARCHAR},
+      cczt = #{cczt,jdbcType=VARCHAR},
+      czr1dwmc = #{czr1dwmc,jdbcType=VARCHAR},
+      czr1dwlx = #{czr1dwlx,jdbcType=VARCHAR},
+      czr1sshy = #{czr1sshy,jdbcType=VARCHAR},
+      czr1dwdh = #{czr1dwdh,jdbcType=VARCHAR},
+      czr1zj = #{czr1zj,jdbcType=VARCHAR},
+      czr1zwmc = #{czr1zwmc,jdbcType=VARCHAR},
+      czr1dwdz = #{czr1dwdz,jdbcType=VARCHAR},
+      czr1ysr = #{czr1ysr,jdbcType=DOUBLE},
+      czr1nsr = #{czr1nsr,jdbcType=DOUBLE},
+      poname = #{poname,jdbcType=VARCHAR},
+      poidtype = #{poidtype,jdbcType=VARCHAR},
+      poidno = #{poidno,jdbcType=VARCHAR},
+      pomobile = #{pomobile,jdbcType=VARCHAR},
+      poqq = #{poqq,jdbcType=VARCHAR},
+      poweixin = #{poweixin,jdbcType=VARCHAR},
+      podwmc = #{podwmc,jdbcType=VARCHAR},
+      podwlx = #{podwlx,jdbcType=VARCHAR},
+      posshy = #{posshy,jdbcType=VARCHAR},
+      podwdh = #{podwdh,jdbcType=VARCHAR},
+      pozj = #{pozj,jdbcType=VARCHAR},
+      pozwmc = #{pozwmc,jdbcType=VARCHAR},
+      podwdz = #{podwdz,jdbcType=VARCHAR},
+      poysr = #{poysr,jdbcType=DOUBLE},
+      ponsr = #{ponsr,jdbcType=DOUBLE},
+      czr2lx = #{czr2lx,jdbcType=VARCHAR},
+      czr2name = #{czr2name,jdbcType=VARCHAR},
+      czr2idtype = #{czr2idtype,jdbcType=VARCHAR},
+      czr2idno = #{czr2idno,jdbcType=VARCHAR},
+      czr2mobile = #{czr2mobile,jdbcType=VARCHAR},
+      czr2qq = #{czr2qq,jdbcType=VARCHAR},
+      czr2weixin = #{czr2weixin,jdbcType=VARCHAR},
+      czr2brgx = #{czr2brgx,jdbcType=VARCHAR},
+      czr2dwmc = #{czr2dwmc,jdbcType=VARCHAR},
+      czr2dwlx = #{czr2dwlx,jdbcType=VARCHAR},
+      czr2sshy = #{czr2sshy,jdbcType=VARCHAR},
+      czr2dwdh = #{czr2dwdh,jdbcType=VARCHAR},
+      czr2zj = #{czr2zj,jdbcType=VARCHAR},
+      czr2zwmc = #{czr2zwmc,jdbcType=VARCHAR},
+      czr2dwdz = #{czr2dwdz,jdbcType=VARCHAR},
+      czr2ysr = #{czr2ysr,jdbcType=DOUBLE},
+      czr2nsr = #{czr2nsr,jdbcType=DOUBLE},
+      lxr1name = #{lxr1name,jdbcType=VARCHAR},
+      lxr1mobile = #{lxr1mobile,jdbcType=VARCHAR},
+      lxr1gx = #{lxr1gx,jdbcType=VARCHAR},
+      lxr1dz = #{lxr1dz,jdbcType=VARCHAR},
+      lxr1sfzdgc = #{lxr1sfzdgc,jdbcType=VARCHAR},
+      lxr2name = #{lxr2name,jdbcType=VARCHAR},
+      lxr2mobile = #{lxr2mobile,jdbcType=VARCHAR},
+      lxr2gx = #{lxr2gx,jdbcType=VARCHAR},
+      lxr2dz = #{lxr2dz,jdbcType=VARCHAR},
+      lxr2sfzdgc = #{lxr2sfzdgc,jdbcType=VARCHAR},
+      jtfzyhqkje = #{jtfzyhqkje,jdbcType=DOUBLE},
+      jtfzyhdqkhk = #{jtfzyhdqkhk,jdbcType=DOUBLE},
+      jtfzp2pqkje = #{jtfzp2pqkje,jdbcType=DOUBLE},
+      jtfzp2pqkyhk = #{jtfzp2pqkyhk,jdbcType=DOUBLE},
+      jtfzdbqkje = #{jtfzdbqkje,jdbcType=DOUBLE},
+      jtfzdbqkyhk = #{jtfzdbqkyhk,jdbcType=DOUBLE},
+      jtfzxykqkje = #{jtfzxykqkje,jdbcType=DOUBLE},
+      jtfzxykqkyhk = #{jtfzxykqkyhk,jdbcType=DOUBLE},
+      jtfzqqqkje = #{jtfzqqqkje,jdbcType=DOUBLE},
+      jtfzqqqkyhk = #{jtfzqqqkyhk,jdbcType=DOUBLE},
+      jtfzpyqkje = #{jtfzpyqkje,jdbcType=DOUBLE},
+      jtfzpyqkyhk = #{jtfzpyqkyhk,jdbcType=DOUBLE},
+      jtfzzcgsqkje = #{jtfzzcgsqkje,jdbcType=DOUBLE},
+      jtfzzcgsqkyhk = #{jtfzzcgsqkyhk,jdbcType=DOUBLE},
+      jtfzze = #{jtfzze,jdbcType=DOUBLE},
+      jtfzzhke = #{jtfzzhke,jdbcType=DOUBLE},
+      sqdzt = #{sqdzt,jdbcType=VARCHAR},
+      sqfqr = #{sqfqr,jdbcType=VARCHAR},
+      sqfqsj = #{sqfqsj,jdbcType=TIMESTAMP},
+      refundacctno = #{refundacctno,jdbcType=VARCHAR},
+      refundbankno = #{refundbankno,jdbcType=VARCHAR},
+      contractid = #{contractid,jdbcType=VARCHAR},
+      cph = #{cph,jdbcType=VARCHAR},
+      confirmdate = #{confirmdate,jdbcType=VARCHAR},
+      reserver1 = #{reserver1,jdbcType=DOUBLE},
+      reserver2 = #{reserver2,jdbcType=DOUBLE},
+      reserver3 = #{reserver3,jdbcType=DOUBLE},
+      reserver4 = #{reserver4,jdbcType=DOUBLE},
+      reserver5 = #{reserver5,jdbcType=VARCHAR},
+      reserver6 = #{reserver6,jdbcType=VARCHAR},
+      reserver7 = #{reserver7,jdbcType=VARCHAR},
+      reserver8 = #{reserver8,jdbcType=BIT},
+      reserver9 = #{reserver9,jdbcType=VARCHAR},
+      reserver10 = #{reserver10,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectBranchAvailablyGpsLvl" resultType="Map">
+      select * from t_gps_lvl 
+      where 
+      FIND_IN_SET(id,
+      (select lvls from t_branch_gps_lvl 
+      where branchid=#{branchId}
+      <![CDATA[
+      	and (minlvlamt<=#{rzje} and maxlvlamt>#{rzje}) 
+      ]]>))
+      order by lvlamt,xsj
+  </select>
+</mapper>

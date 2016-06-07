@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.SysBranchMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.SysBranch" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="branchname" property="branchname" jdbcType="VARCHAR" />
+    <result column="areano" property="areano" jdbcType="VARCHAR" />
+    <result column="openbankno" property="openbankno" jdbcType="VARCHAR" />
+    <result column="acctname" property="acctname" jdbcType="VARCHAR" />
+    <result column="openbankname" property="openbankname" jdbcType="VARCHAR" />
+    <result column="branchtel" property="branchtel" jdbcType="VARCHAR" />
+    <result column="branchaddress" property="branchaddress" jdbcType="VARCHAR" />
+    <result column="branchalias" property="branchalias" jdbcType="VARCHAR" />
+    <result column="linkmain" property="linkmain" jdbcType="VARCHAR" />
+    <result column="linktel" property="linktel" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="managertel" property="managertel" jdbcType="VARCHAR" />
+    <result column="createid" property="createid" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="reserver1" property="reserver1" jdbcType="VARCHAR" />
+    <result column="reserver2" property="reserver2" jdbcType="VARCHAR" />
+    <collection property="gpslvl0t4s" select="selectBranch0t4Lvls" column="id" ofType="com.pujjr.business.domain.GpsLvl"></collection>
+    <collection property="gpslvl4t6s" select="selectBranch4t6Lvls" column="id" ofType="com.pujjr.business.domain.GpsLvl"></collection>
+    <collection property="gpslvl6s" select="selectBranch6Lvls" column="id" ofType="com.pujjr.business.domain.GpsLvl"></collection>
+  </resultMap>
+  <resultMap id="GpsLvlMap" type="com.pujjr.business.domain.GpsLvl" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="lvlname" property="lvlname" jdbcType="VARCHAR" />
+    <result column="cbj" property="cbj" jdbcType="DOUBLE" />
+    <result column="xsj" property="xsj" jdbcType="DOUBLE" />
+    <result column="jxsfybl" property="jxsfybl" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectBranch0t4Lvls" parameterType="String" resultMap="GpsLvlMap">
+      select * from t_gps_lvl 
+      where 
+      FIND_IN_SET(id,
+      (select lvls from t_branch_gps_lvl 
+      where branchid=#{branchId}
+      <![CDATA[
+      	and (maxlvlamt=40000) 
+      ]]>))
+  </select>
+  <select id="selectBranch4t6Lvls" parameterType="String" resultMap="GpsLvlMap">
+      select * from t_gps_lvl 
+      where 
+      FIND_IN_SET(id,
+      (select lvls from t_branch_gps_lvl 
+      where branchid=#{branchId}
+      <![CDATA[
+      	and (maxlvlamt=60000) 
+      ]]>))
+  </select>
+  <select id="selectBranch6Lvls" parameterType="String" resultMap="GpsLvlMap">
+      select * from t_gps_lvl 
+      where 
+      FIND_IN_SET(id,
+      (select lvls from t_branch_gps_lvl 
+      where branchid=#{branchId}
+      <![CDATA[
+      	and (minlvlamt=60000) 
+      ]]>))
+  </select>
+  <sql id="Base_Column_List" >
+    id, branchname, areano, openbankno, acctname, openbankname, branchtel, branchaddress, 
+    branchalias, linkmain, linktel, zipcode, manager, managertel, createid, createdate, 
+    reserver1, reserver2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_branch
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_branch
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_branch
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.SysBranch" >
+    insert into sys_branch (id, branchname, areano, 
+      openbankno, acctname, openbankname, 
+      branchtel, branchaddress, branchalias, 
+      linkmain, linktel, zipcode, 
+      manager, managertel, createid, 
+      createdate, reserver1, reserver2
+      )
+    values (#{id,jdbcType=VARCHAR}, #{branchname,jdbcType=VARCHAR}, #{areano,jdbcType=VARCHAR}, 
+      #{openbankno,jdbcType=VARCHAR}, #{acctname,jdbcType=VARCHAR}, #{openbankname,jdbcType=VARCHAR}, 
+      #{branchtel,jdbcType=VARCHAR}, #{branchaddress,jdbcType=VARCHAR}, #{branchalias,jdbcType=VARCHAR}, 
+      #{linkmain,jdbcType=VARCHAR}, #{linktel,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=VARCHAR}, #{managertel,jdbcType=VARCHAR}, #{createid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=DATE}, #{reserver1,jdbcType=VARCHAR}, #{reserver2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.SysBranch" >
+    insert into sys_branch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="branchname != null" >
+        branchname,
+      </if>
+      <if test="areano != null" >
+        areano,
+      </if>
+      <if test="openbankno != null" >
+        openbankno,
+      </if>
+      <if test="acctname != null" >
+        acctname,
+      </if>
+      <if test="openbankname != null" >
+        openbankname,
+      </if>
+      <if test="branchtel != null" >
+        branchtel,
+      </if>
+      <if test="branchaddress != null" >
+        branchaddress,
+      </if>
+      <if test="branchalias != null" >
+        branchalias,
+      </if>
+      <if test="linkmain != null" >
+        linkmain,
+      </if>
+      <if test="linktel != null" >
+        linktel,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="managertel != null" >
+        managertel,
+      </if>
+      <if test="createid != null" >
+        createid,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="reserver1 != null" >
+        reserver1,
+      </if>
+      <if test="reserver2 != null" >
+        reserver2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="branchname != null" >
+        #{branchname,jdbcType=VARCHAR},
+      </if>
+      <if test="areano != null" >
+        #{areano,jdbcType=VARCHAR},
+      </if>
+      <if test="openbankno != null" >
+        #{openbankno,jdbcType=VARCHAR},
+      </if>
+      <if test="acctname != null" >
+        #{acctname,jdbcType=VARCHAR},
+      </if>
+      <if test="openbankname != null" >
+        #{openbankname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchtel != null" >
+        #{branchtel,jdbcType=VARCHAR},
+      </if>
+      <if test="branchaddress != null" >
+        #{branchaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="branchalias != null" >
+        #{branchalias,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmain != null" >
+        #{linkmain,jdbcType=VARCHAR},
+      </if>
+      <if test="linktel != null" >
+        #{linktel,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="managertel != null" >
+        #{managertel,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        #{createid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="reserver1 != null" >
+        #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        #{reserver2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.SysBranch" >
+    update sys_branch
+    <set >
+      <if test="branchname != null" >
+        branchname = #{branchname,jdbcType=VARCHAR},
+      </if>
+      <if test="areano != null" >
+        areano = #{areano,jdbcType=VARCHAR},
+      </if>
+      <if test="openbankno != null" >
+        openbankno = #{openbankno,jdbcType=VARCHAR},
+      </if>
+      <if test="acctname != null" >
+        acctname = #{acctname,jdbcType=VARCHAR},
+      </if>
+      <if test="openbankname != null" >
+        openbankname = #{openbankname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchtel != null" >
+        branchtel = #{branchtel,jdbcType=VARCHAR},
+      </if>
+      <if test="branchaddress != null" >
+        branchaddress = #{branchaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="branchalias != null" >
+        branchalias = #{branchalias,jdbcType=VARCHAR},
+      </if>
+      <if test="linkmain != null" >
+        linkmain = #{linkmain,jdbcType=VARCHAR},
+      </if>
+      <if test="linktel != null" >
+        linktel = #{linktel,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="managertel != null" >
+        managertel = #{managertel,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null" >
+        createid = #{createid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="reserver1 != null" >
+        reserver1 = #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        reserver2 = #{reserver2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.SysBranch" >
+    update sys_branch
+    set branchname = #{branchname,jdbcType=VARCHAR},
+      areano = #{areano,jdbcType=VARCHAR},
+      openbankno = #{openbankno,jdbcType=VARCHAR},
+      acctname = #{acctname,jdbcType=VARCHAR},
+      openbankname = #{openbankname,jdbcType=VARCHAR},
+      branchtel = #{branchtel,jdbcType=VARCHAR},
+      branchaddress = #{branchaddress,jdbcType=VARCHAR},
+      branchalias = #{branchalias,jdbcType=VARCHAR},
+      linkmain = #{linkmain,jdbcType=VARCHAR},
+      linktel = #{linktel,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=VARCHAR},
+      managertel = #{managertel,jdbcType=VARCHAR},
+      createid = #{createid,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      reserver1 = #{reserver1,jdbcType=VARCHAR},
+      reserver2 = #{reserver2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

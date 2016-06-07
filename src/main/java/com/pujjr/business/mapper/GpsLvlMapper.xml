@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.GpsLvlMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.GpsLvl" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="lvlname" property="lvlname" jdbcType="VARCHAR" />
+    <result column="cbj" property="cbj" jdbcType="DOUBLE" />
+    <result column="xsj" property="xsj" jdbcType="DOUBLE" />
+    <result column="jxsfybl" property="jxsfybl" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, lvlname, cbj, xsj, jxsfybl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_gps_lvl
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_gps_lvl
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.GpsLvl" >
+    insert into t_gps_lvl (id, lvlname, cbj, 
+      xsj, jxsfybl)
+    values (#{id,jdbcType=VARCHAR}, #{lvlname,jdbcType=VARCHAR}, #{cbj,jdbcType=DOUBLE}, 
+      #{xsj,jdbcType=DOUBLE}, #{jxsfybl,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.GpsLvl" >
+    insert into t_gps_lvl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lvlname != null" >
+        lvlname,
+      </if>
+      <if test="cbj != null" >
+        cbj,
+      </if>
+      <if test="xsj != null" >
+        xsj,
+      </if>
+      <if test="jxsfybl != null" >
+        jxsfybl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="lvlname != null" >
+        #{lvlname,jdbcType=VARCHAR},
+      </if>
+      <if test="cbj != null" >
+        #{cbj,jdbcType=DOUBLE},
+      </if>
+      <if test="xsj != null" >
+        #{xsj,jdbcType=DOUBLE},
+      </if>
+      <if test="jxsfybl != null" >
+        #{jxsfybl,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.GpsLvl" >
+    update t_gps_lvl
+    <set >
+      <if test="lvlname != null" >
+        lvlname = #{lvlname,jdbcType=VARCHAR},
+      </if>
+      <if test="cbj != null" >
+        cbj = #{cbj,jdbcType=DOUBLE},
+      </if>
+      <if test="xsj != null" >
+        xsj = #{xsj,jdbcType=DOUBLE},
+      </if>
+      <if test="jxsfybl != null" >
+        jxsfybl = #{jxsfybl,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.GpsLvl" >
+    update t_gps_lvl
+    set lvlname = #{lvlname,jdbcType=VARCHAR},
+      cbj = #{cbj,jdbcType=DOUBLE},
+      xsj = #{xsj,jdbcType=DOUBLE},
+      jxsfybl = #{jxsfybl,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectList" resultMap="BaseResultMap">
+      select * from t_gps_lvl where lvlamt=#{lvlamt} order by lvlamt,xsj
+  </select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.SysRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.SysRoleMenuKey" >
+    <id column="MENUID" property="menuid" jdbcType="VARCHAR" />
+    <id column="ROLEID" property="roleid" jdbcType="VARCHAR" />
+  </resultMap>
+   <select id="selectByPrimaryKey" parameterType="com.pujjr.business.domain.SysRoleMenuKey" resultType="com.pujjr.business.domain.SysRoleMenuKey">
+  	select * from SYS_ROLE_MENU where roleid=#{roleid} and menuid=#{menuid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.pujjr.business.domain.SysRoleMenuKey" >
+    delete from sys_role_menu
+    where MENUID = #{menuid,jdbcType=VARCHAR}
+      and ROLEID = #{roleid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.SysRoleMenuKey" >
+    insert into sys_role_menu (MENUID, ROLEID)
+    values (#{menuid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.SysRoleMenuKey" >
+    insert into sys_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        MENUID,
+      </if>
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByRoleId" parameterType="String" >
+    delete from SYS_ROLE_MENU
+    where ROLEID = #{roleid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.SysAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.SysAccount" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="branchid" property="branchid" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="telno" property="telno" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="property" property="property" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <association property="sysBranch" select="selectAccountBranch" column="branchid"></association>
+    <collection property="roles" select="selectAccountRoles" column="id" ofType="com.pujjr.business.domain.SysAccountRoleKey"></collection>
+  </resultMap>
+  <resultMap id="SysBranchResultMap" type="com.pujjr.business.domain.SysBranch" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="branchname" property="branchname" jdbcType="VARCHAR" />
+    <result column="areano" property="areano" jdbcType="VARCHAR" />
+    <result column="openbankno" property="openbankno" jdbcType="VARCHAR" />
+    <result column="acctname" property="acctname" jdbcType="VARCHAR" />
+    <result column="openbankname" property="openbankname" jdbcType="VARCHAR" />
+    <result column="branchtel" property="branchtel" jdbcType="VARCHAR" />
+    <result column="branchaddress" property="branchaddress" jdbcType="VARCHAR" />
+    <result column="branchalias" property="branchalias" jdbcType="VARCHAR" />
+    <result column="linkmain" property="linkmain" jdbcType="VARCHAR" />
+    <result column="linktel" property="linktel" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="managertel" property="managertel" jdbcType="VARCHAR" />
+    <result column="createid" property="createid" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="reserver1" property="reserver1" jdbcType="VARCHAR" />
+    <result column="reserver2" property="reserver2" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAccountBranch" parameterType="String" resultMap="SysBranchResultMap">
+  	select * from SYS_BRANCH where 1=1 and  id=#{branchid}
+  </select>
+ <resultMap type="com.pujjr.business.domain.SysAccountRoleKey" id="SysAccountRoleResult">
+  	<id column="ACCOUNTID" property="accountid" jdbcType="VARCHAR" />
+    <id column="ROLEID" property="roleid" jdbcType="VARCHAR" />
+    <id column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAccountRoles" parameterType="String" resultMap="SysAccountRoleResult">
+  	select a.roleid,a.accountid,b.rolename from SYS_ACCOUNT_ROLE a
+  	left join SYS_ROLE b on a.roleid=b.id
+  	where 1=1 and  a.accountid=#{id}
+  </select>
+  <sql id="Base_Column_List" >
+    id, name, passwd, branchid, address, telno, mail, property, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account  
+    where id !='admin'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_account
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.SysAccount" >
+    insert into sys_account (id, name, passwd, 
+      branchid, address, telno, 
+      mail, property, status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, 
+      #{branchid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{telno,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{property,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.SysAccount" >
+    insert into sys_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="branchid != null" >
+        branchid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="telno != null" >
+        telno,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="property != null" >
+        property,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="branchid != null" >
+        #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telno != null" >
+        #{telno,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null" >
+        #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.SysAccount" >
+    update sys_account
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="branchid != null" >
+        branchid = #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telno != null" >
+        telno = #{telno,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null" >
+        property = #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.SysAccount" >
+    update sys_account
+    set name = #{name,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      branchid = #{branchid,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telno = #{telno,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      property = #{property,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

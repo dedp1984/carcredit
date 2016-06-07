@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.LeasingApproveMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.LeasingApprove" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="jyjg" property="jyjg" jdbcType="VARCHAR" />
+    <result column="fkfs" property="fkfs" jdbcType="VARCHAR" />
+    <result column="fkfjtj" property="fkfjtj" jdbcType="VARCHAR" />
+    <result column="shyyj" property="shyyj" jdbcType="VARCHAR" />
+    <result column="qxr1yj" property="qxr1yj" jdbcType="VARCHAR" />
+    <result column="qxr2yj" property="qxr2yj" jdbcType="VARCHAR" />
+    <result column="zjlyj" property="zjlyj" jdbcType="VARCHAR" />
+    <result column="spr" property="spr" jdbcType="VARCHAR" />
+    <result column="spsj" property="spsj" jdbcType="TIMESTAMP" />
+    <result column="reserver1" property="reserver1" jdbcType="VARCHAR" />
+    <result column="reserver2" property="reserver2" jdbcType="VARCHAR" />
+    <result column="reserver3" property="reserver3" jdbcType="VARCHAR" />
+    <result column="reserver4" property="reserver4" jdbcType="VARCHAR" />
+    <result column="reserver5" property="reserver5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, jyjg, fkfs, fkfjtj, shyyj, qxr1yj, qxr2yj, zjlyj, spr, spsj, reserver1, reserver2, 
+    reserver3, reserver4, reserver5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_leasing_approve
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_leasing_approve
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.LeasingApprove" >
+    insert into t_leasing_approve (id, jyjg, fkfs, 
+      fkfjtj, shyyj, qxr1yj, 
+      qxr2yj, zjlyj, spr, 
+      spsj, reserver1, reserver2, 
+      reserver3, reserver4, reserver5
+      )
+    values (#{id,jdbcType=VARCHAR}, #{jyjg,jdbcType=VARCHAR}, #{fkfs,jdbcType=VARCHAR}, 
+      #{fkfjtj,jdbcType=VARCHAR}, #{shyyj,jdbcType=VARCHAR}, #{qxr1yj,jdbcType=VARCHAR}, 
+      #{qxr2yj,jdbcType=VARCHAR}, #{zjlyj,jdbcType=VARCHAR}, #{spr,jdbcType=VARCHAR}, 
+      #{spsj,jdbcType=TIMESTAMP}, #{reserver1,jdbcType=VARCHAR}, #{reserver2,jdbcType=VARCHAR}, 
+      #{reserver3,jdbcType=VARCHAR}, #{reserver4,jdbcType=VARCHAR}, #{reserver5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.LeasingApprove" >
+    insert into t_leasing_approve
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jyjg != null" >
+        jyjg,
+      </if>
+      <if test="fkfs != null" >
+        fkfs,
+      </if>
+      <if test="fkfjtj != null" >
+        fkfjtj,
+      </if>
+      <if test="shyyj != null" >
+        shyyj,
+      </if>
+      <if test="qxr1yj != null" >
+        qxr1yj,
+      </if>
+      <if test="qxr2yj != null" >
+        qxr2yj,
+      </if>
+      <if test="zjlyj != null" >
+        zjlyj,
+      </if>
+      <if test="spr != null" >
+        spr,
+      </if>
+      <if test="spsj != null" >
+        spsj,
+      </if>
+      <if test="reserver1 != null" >
+        reserver1,
+      </if>
+      <if test="reserver2 != null" >
+        reserver2,
+      </if>
+      <if test="reserver3 != null" >
+        reserver3,
+      </if>
+      <if test="reserver4 != null" >
+        reserver4,
+      </if>
+      <if test="reserver5 != null" >
+        reserver5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jyjg != null" >
+        #{jyjg,jdbcType=VARCHAR},
+      </if>
+      <if test="fkfs != null" >
+        #{fkfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fkfjtj != null" >
+        #{fkfjtj,jdbcType=VARCHAR},
+      </if>
+      <if test="shyyj != null" >
+        #{shyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="qxr1yj != null" >
+        #{qxr1yj,jdbcType=VARCHAR},
+      </if>
+      <if test="qxr2yj != null" >
+        #{qxr2yj,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlyj != null" >
+        #{zjlyj,jdbcType=VARCHAR},
+      </if>
+      <if test="spr != null" >
+        #{spr,jdbcType=VARCHAR},
+      </if>
+      <if test="spsj != null" >
+        #{spsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserver1 != null" >
+        #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        #{reserver2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver3 != null" >
+        #{reserver3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver4 != null" >
+        #{reserver4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver5 != null" >
+        #{reserver5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.LeasingApprove" >
+    update t_leasing_approve
+    <set >
+      <if test="jyjg != null" >
+        jyjg = #{jyjg,jdbcType=VARCHAR},
+      </if>
+      <if test="fkfs != null" >
+        fkfs = #{fkfs,jdbcType=VARCHAR},
+      </if>
+      <if test="fkfjtj != null" >
+        fkfjtj = #{fkfjtj,jdbcType=VARCHAR},
+      </if>
+      <if test="shyyj != null" >
+        shyyj = #{shyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="qxr1yj != null" >
+        qxr1yj = #{qxr1yj,jdbcType=VARCHAR},
+      </if>
+      <if test="qxr2yj != null" >
+        qxr2yj = #{qxr2yj,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlyj != null" >
+        zjlyj = #{zjlyj,jdbcType=VARCHAR},
+      </if>
+      <if test="spr != null" >
+        spr = #{spr,jdbcType=VARCHAR},
+      </if>
+      <if test="spsj != null" >
+        spsj = #{spsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserver1 != null" >
+        reserver1 = #{reserver1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver2 != null" >
+        reserver2 = #{reserver2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver3 != null" >
+        reserver3 = #{reserver3,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver4 != null" >
+        reserver4 = #{reserver4,jdbcType=VARCHAR},
+      </if>
+      <if test="reserver5 != null" >
+        reserver5 = #{reserver5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.LeasingApprove" >
+    update t_leasing_approve
+    set jyjg = #{jyjg,jdbcType=VARCHAR},
+      fkfs = #{fkfs,jdbcType=VARCHAR},
+      fkfjtj = #{fkfjtj,jdbcType=VARCHAR},
+      shyyj = #{shyyj,jdbcType=VARCHAR},
+      qxr1yj = #{qxr1yj,jdbcType=VARCHAR},
+      qxr2yj = #{qxr2yj,jdbcType=VARCHAR},
+      zjlyj = #{zjlyj,jdbcType=VARCHAR},
+      spr = #{spr,jdbcType=VARCHAR},
+      spsj = #{spsj,jdbcType=TIMESTAMP},
+      reserver1 = #{reserver1,jdbcType=VARCHAR},
+      reserver2 = #{reserver2,jdbcType=VARCHAR},
+      reserver3 = #{reserver3,jdbcType=VARCHAR},
+      reserver4 = #{reserver4,jdbcType=VARCHAR},
+      reserver5 = #{reserver5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

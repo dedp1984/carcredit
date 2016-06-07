@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.BranchGpsLvlMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.BranchGpsLvl" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="branchid" property="branchid" jdbcType="VARCHAR" />
+    <result column="minlvlamt" property="minlvlamt" jdbcType="DOUBLE" />
+    <result column="maxlvlamt" property="maxlvlamt" jdbcType="DOUBLE" />
+    <result column="lvls" property="lvls" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, branchid, minlvlamt, maxlvlamt, lvls
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_branch_gps_lvl
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_branch_gps_lvl
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByBranchId" parameterType="java.lang.String" >
+    delete from t_branch_gps_lvl
+    where branchid = #{branchid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.BranchGpsLvl" >
+    insert into t_branch_gps_lvl (id, branchid, minlvlamt, 
+      maxlvlamt, lvls)
+    values (#{id,jdbcType=VARCHAR}, #{branchid,jdbcType=VARCHAR}, #{minlvlamt,jdbcType=DOUBLE}, 
+      #{maxlvlamt,jdbcType=DOUBLE}, #{lvls,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.BranchGpsLvl" >
+    insert into t_branch_gps_lvl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="branchid != null" >
+        branchid,
+      </if>
+      <if test="minlvlamt != null" >
+        minlvlamt,
+      </if>
+      <if test="maxlvlamt != null" >
+        maxlvlamt,
+      </if>
+      <if test="lvls != null" >
+        lvls,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="branchid != null" >
+        #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="minlvlamt != null" >
+        #{minlvlamt,jdbcType=DOUBLE},
+      </if>
+      <if test="maxlvlamt != null" >
+        #{maxlvlamt,jdbcType=DOUBLE},
+      </if>
+      <if test="lvls != null" >
+        #{lvls,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pujjr.business.domain.BranchGpsLvl" >
+    update t_branch_gps_lvl
+    <set >
+      <if test="branchid != null" >
+        branchid = #{branchid,jdbcType=VARCHAR},
+      </if>
+      <if test="minlvlamt != null" >
+        minlvlamt = #{minlvlamt,jdbcType=DOUBLE},
+      </if>
+      <if test="maxlvlamt != null" >
+        maxlvlamt = #{maxlvlamt,jdbcType=DOUBLE},
+      </if>
+      <if test="lvls != null" >
+        lvls = #{lvls,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pujjr.business.domain.BranchGpsLvl" >
+    update t_branch_gps_lvl
+    set branchid = #{branchid,jdbcType=VARCHAR},
+      minlvlamt = #{minlvlamt,jdbcType=DOUBLE},
+      maxlvlamt = #{maxlvlamt,jdbcType=DOUBLE},
+      lvls = #{lvls,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.SysAccountRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.SysAccountRoleKey" >
+    <id column="accountid" property="accountid" jdbcType="VARCHAR" />
+    <id column="roleid" property="roleid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.pujjr.business.domain.SysAccountRoleKey" >
+    delete from sys_account_role
+    where accountid = #{accountid,jdbcType=VARCHAR}
+      and roleid = #{roleid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.SysAccountRoleKey" >
+    insert into sys_account_role (accountid, roleid)
+    values (#{accountid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.SysAccountRoleKey" >
+    insert into sys_account_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountid != null" >
+        accountid,
+      </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountid != null" >
+        #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByAccountid" parameterType="String">
+  	delete from SYS_ACCOUNT_ROLE
+    where ACCOUNTID = #{accountid,jdbcType=VARCHAR}
+  </delete>
+</mapper>
