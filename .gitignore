@@ -1,5 +1,2 @@
-dist/
 .settings/*
 target/*
-.classpath
-.project
