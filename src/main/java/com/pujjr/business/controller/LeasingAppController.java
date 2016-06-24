@@ -401,6 +401,10 @@ public class LeasingAppController extends BaseController
 		sheet.setColumnWidth(20, 4000);
 		sheet.setColumnWidth(21, 4000);
 		sheet.setColumnWidth(22, 4000);
+		sheet.setColumnWidth(23, 4000);
+		sheet.setColumnWidth(24, 4000);
+		sheet.setColumnWidth(25, 4000);
+		sheet.setColumnWidth(26, 4000);
 		
 		Row row=sheet.createRow(0);
 		writeCellValue(wb,sheet,row,0,"序号",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
@@ -426,6 +430,10 @@ public class LeasingAppController extends BaseController
 		writeCellValue(wb,sheet,row,20,"执行利率",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		writeCellValue(wb,sheet,row,21,"月供款",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		writeCellValue(wb,sheet,row,22,"案件状态",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,23,"婚姻状况",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,24,"附加条件",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,25,"审核员意见",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,26,"审批人一意见",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		
 		Font fontNormal=wb.createFont();		
 		fontNormal.setFontHeightInPoints((short)10);
@@ -434,12 +442,13 @@ public class LeasingAppController extends BaseController
 		{
 			row=sheet.createRow(i+1);
 			Map item=list.get(i);
+			System.out.println(String.valueOf(i)+item.get("producttype").toString());
 			String seq=String.valueOf(i+1);
 			String productType=item.get("producttype").toString();
 			String productSerial=item.get("productname").toString().split("-")[1];
 			String ppcx=item.get("ppcx").toString();
 			String custType=item.get("reserver5").toString();
-			String custName=item.get("name").toString();
+			String custName=item.containsKey("name")?item.get("name").toString():"";
 			String idNo=item.get("idno").toString();
 			String jxs=item.get("sqfqr").toString();
 			Object tmpShr=item.get("shr");
@@ -458,6 +467,10 @@ public class LeasingAppController extends BaseController
 			double rate=(Double)item.get("rate");
 			String sqdzt1=item.get("sqdzt").toString();
 			double ygk=(Double)item.get("ygk");
+			String hyzk=item.containsKey("hyzk")?item.get("hyzk").toString():"";
+			String fkfjtj=item.containsKey("fkfjtj")?item.get("fkfjtj").toString():"";
+			String shyyj=item.containsKey("shyyj")?item.get("shyyj").toString():"";
+			String qxr1yj=item.containsKey("qxr1yj")?item.get("qxr1yj").toString():"";
 			writeCellValue(wb,sheet,row,0,seq,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,1,productType,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,2,productSerial,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
@@ -483,6 +496,10 @@ public class LeasingAppController extends BaseController
 			writeCellValue(wb,sheet,row,20,df1.format(rate*100)+"%",fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,21,df.format(ygk),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
 			writeCellValue(wb,sheet,row,22,sqdzt1,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,23,hyzk,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,24,fkfjtj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,25,shyyj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,26,qxr1yj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			
 		}
 		
@@ -506,6 +523,12 @@ public class LeasingAppController extends BaseController
 		String userid=claims.getSubject();
 		SysAccount sysAccount=sysAccountService.get(userid);
 		return leasingAppServ.getBranchAvailablyGpsLvl(sysAccount.getBranchid(), Double.valueOf(rzje));
+	}
+	@RequestMapping(value="/getOnApproveRecord/{id}")
+	@ResponseBody
+	public Map getOnApproveRecord(@PathVariable String id)
+	{
+		return leasingAppServ.getOnApproveRecord(id);
 	}
 	
 }

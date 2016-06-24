@@ -157,6 +157,25 @@ public class LeasingAppService {
 			int  rzqx=(Integer)item.get("rzqx");
 			double ygk=Math.round((rzje-fwf)/10000*wyyhk+Math.ceil(fwf/rzqx));
 			item.put("ygk", ygk);
+			String hyzk=(String)item.get("hyzk");
+			switch(Integer.valueOf(hyzk))
+			{
+				case 1:
+					hyzk="Œ¥ªÈ";
+					break;
+				case 2:
+					hyzk="“—ªÈ";
+					break;			
+				case 3:
+					hyzk="¿Î“Ï";
+					break;
+				case 4:
+					hyzk="…•≈º";
+					break;
+				default:
+					break;
+			}
+			item.put("hyzk",hyzk);
 			list.set(i, item);
 		}
 		return list;
@@ -166,5 +185,10 @@ public class LeasingAppService {
 	public List<Map>  getBranchAvailablyGpsLvl(String branchId,double rzje)
 	{
 		return leasingAppDao.selectBranchAvailablyGpsLvl(branchId, rzje);
+	}
+	
+	public Map getOnApproveRecord(String id)
+	{
+		return leasingAppDao.selectOnApproveRecord(id);
 	}
 }

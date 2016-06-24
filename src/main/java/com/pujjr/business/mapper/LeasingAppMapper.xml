@@ -242,7 +242,12 @@
       		a.sfbl/100 as sfbl,
       		prod.rate/100 as rate,
       		a.sqdzt,
-      		prod.yhk as wyyhk
+      		prod.yhk as wyyhk,
+      		a.hyzk,
+      		p.fkfjtj,
+      		p.shyyj,
+      		p.qxr1yj
+      		
 		from t_leasing_app a
 
 		left join t_leasing_check c on a.id=c.id
@@ -1758,5 +1763,30 @@
       	and (minlvlamt<=#{rzje} and maxlvlamt>#{rzje}) 
       ]]>))
       order by lvlamt,xsj
+  </select>
+  <select id="selectOnApproveRecord" resultType="HashMap">
+  	select 
+	a.id,
+	a.sqdzt,
+	b.branchname,
+	b.openbankname,
+	b.openbankno,
+	a.name,
+	a.idno,
+	a.refundbankno,
+	a.refundacctno,
+	a.rzje,
+	a.reserver1,
+	a.reserver2,
+	a.reserver3,
+	a.rzqx
+	from t_leasing_app a
+	
+	left join sys_branch b on a.jxsid=b.id
+	
+	where 
+	
+	a.id=#{id}
+  	
   </select>
 </mapper>

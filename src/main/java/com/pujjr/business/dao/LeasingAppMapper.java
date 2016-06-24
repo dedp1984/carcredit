@@ -55,4 +55,5 @@ public interface LeasingAppMapper {
     										@Param("branchId")String branchId,
     										@Param("rzje")double rzje
     									  );
+    Map selectOnApproveRecord(@Param("id")String id);
 }
