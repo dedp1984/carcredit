@@ -191,4 +191,9 @@ public class LeasingAppService {
 	{
 		return leasingAppDao.selectOnApproveRecord(id);
 	}
+	
+	public List<Map> getkhhzhzb()
+	{
+		return leasingAppDao.selectkhhzhzb();
+	}
 }

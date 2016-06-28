@@ -1789,4 +1789,22 @@
 	a.id=#{id}
   	
   </select>
+  <select id="selectkhhzhzb" resultType="HashMap">
+  	select 
+		a.id,
+		a.name,
+		a.sqfqr,
+		a.rzje,
+		a.rzqx,
+		b.rate,
+		a.rzsxf,
+		a.reserver1 as gpsfee,
+		a.reserver1-a.reserver2 as gpsjw,
+		a.reserver2 as jxsfy,
+		a.reserver3 as pgf,
+		a.fwf,
+		b.yhk
+	from t_leasing_app a
+	left join t_product b on a.producttype=b.productname and a.productname=b.productseq and a.rzqx=b.periods
+  </select>
 </mapper>
