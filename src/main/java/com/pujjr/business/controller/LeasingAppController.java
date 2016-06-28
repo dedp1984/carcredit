@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -535,8 +537,9 @@ public class LeasingAppController extends BaseController
 	@ResponseBody
 	public ResponseEntity<byte[]> exportKhhzhzb(String ids,HttpSession session) throws ParseException, IOException
 	{
-		
-		List<Map> list=leasingAppServ.getkhhzhzb();
+		String[] sIds=(ids.substring(0, ids.length()-1)).split(",");
+		List<String> listIds=Arrays.asList(sIds);
+		List<Map> list=leasingAppServ.getkhhzhzb(listIds);
 		
 		Workbook wb=new HSSFWorkbook();
 		Sheet sheet=wb.createSheet();
@@ -558,7 +561,7 @@ public class LeasingAppController extends BaseController
 		sheet.setColumnWidth(10, 5000);
 		sheet.setColumnWidth(11, 5000);
 		sheet.setColumnWidth(12, 5000);
-		sheet.setColumnWidth(13, 10000);
+		sheet.setColumnWidth(13, 5000);
 		sheet.setColumnWidth(14, 5000);
 		sheet.setColumnWidth(15, 5000);
 		

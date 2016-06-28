@@ -57,5 +57,5 @@ public interface LeasingAppMapper {
     									  );
     Map selectOnApproveRecord(@Param("id")String id);
     
-    List<Map> selectkhhzhzb();
+    List<Map> selectkhhzhzb(@Param("listIds") List<String> listIds);
 }

@@ -1806,5 +1806,10 @@
 		b.yhk
 	from t_leasing_app a
 	left join t_product b on a.producttype=b.productname and a.productname=b.productseq and a.rzqx=b.periods
+	
+	where a.id in
+	<foreach collection="listIds" index="i" item="appid" open="(" close=")" separator=",">
+		#{appid}
+	</foreach>
   </select>
 </mapper>
