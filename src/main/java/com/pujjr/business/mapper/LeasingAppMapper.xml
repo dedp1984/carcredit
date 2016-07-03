@@ -1779,15 +1779,15 @@
 	a.reserver1,
 	a.reserver2,
 	a.reserver3,
-	a.rzqx
+	a.rzqx,
+	a.fwf,
+	d.yhk
 	from t_leasing_app a
-	
 	left join sys_branch b on a.jxsid=b.id
-	
-	where 
-	
-	a.id=#{id}
-  	
+	left join t_product d on a.producttype=d.productname and a.productname=d.productseq and a.rzqx=d.periods
+	inner join t_tmpexp c on a.id=c.tranid
+	where  c.sessionid=#{sessionid}
+        order by c.idx asc	
   </select>
   <select id="selectkhhzhzb" resultType="HashMap">
   	select 
@@ -1806,10 +1806,22 @@
 		b.yhk
 	from t_leasing_app a
 	left join t_product b on a.producttype=b.productname and a.productname=b.productseq and a.rzqx=b.periods
+	inner join t_tmpexp c on a.id=c.tranid
+	where  c.sessionid=#{sessionid}
+        order by c.idx asc
 	
-	where a.id in
-	<foreach collection="listIds" index="i" item="appid" open="(" close=")" separator=",">
-		#{appid}
-	</foreach>
+  </select>
+   <select id="selectKhhkxxb" resultType="HashMap">
+  	select 
+  		a.*,
+		b.rate,
+		b.periods,
+		b.yhk
+	from t_leasing_app a
+	left join t_product b on a.producttype=b.productname and a.productname=b.productseq and a.rzqx=b.periods
+	inner join t_tmpexp c on a.id=c.tranid
+	where  c.sessionid=#{sessionid}
+        order by c.idx asc
+	
   </select>
 </mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<classPathEntry
-		location="E:\workspace\J2EE\FDYH\target\FDYH\WEB-INF\lib\mysql-connector-java-5.1.35.jar" />
+		location="H:\workspace\J2EE\carcredit\target\carcredit\WEB-INF\lib\mysql-connector-java-5.1.35.jar" />
 		
 	
 	<context id="mysqlMybatis"  defaultModelType="conditional" >
@@ -12,8 +12,8 @@
 			<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		</commentGenerator>
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.0.101:3306/xdxt?characterEncoding=UTF-8" userId="asd"
-			password="asd" />
+			connectionURL="jdbc:mysql://192.168.0.101:3306/xdxt?characterEncoding=UTF-8" userId="test"
+			password="test" />
 		<javaModelGenerator targetPackage="com.pujjr.business.domain"
 			targetProject="carcredit/src/main/java" />
 		<sqlMapGenerator targetPackage="com.pujjr.business.mapper"
@@ -91,8 +91,12 @@
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		-->
 		<table tableName="T_BRANCH_GPS_LVL" domainObjectName="BranchGpsLvl" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		-->
+		<table tableName="T_TMPEXP" domainObjectName="TmpExport" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>

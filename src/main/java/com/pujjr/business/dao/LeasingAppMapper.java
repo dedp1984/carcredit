@@ -55,7 +55,8 @@ public interface LeasingAppMapper {
     										@Param("branchId")String branchId,
     										@Param("rzje")double rzje
     									  );
-    Map selectOnApproveRecord(@Param("id")String id);
+    List<Map> selectOnApproveRecord(@Param("sessionid") String sessionid);
     
-    List<Map> selectkhhzhzb(@Param("listIds") List<String> listIds);
+    List<Map> selectkhhzhzb(@Param("sessionid") String sessionid);
+    List<Map> selectKhhkxxb(@Param("sessionid") String sessionid);
 }

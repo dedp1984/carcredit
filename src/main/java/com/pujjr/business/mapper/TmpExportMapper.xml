@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pujjr.business.dao.TmpExportMapper" >
+  <resultMap id="BaseResultMap" type="com.pujjr.business.domain.TmpExportKey" >
+    <id column="idx" property="idx" jdbcType="INTEGER" />
+    <id column="sessionid" property="sessionid" jdbcType="VARCHAR" />
+    <id column="tranid" property="tranid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.pujjr.business.domain.TmpExportKey" >
+    delete from t_tmpexp
+    where idx = #{idx,jdbcType=INTEGER}
+      and sessionid = #{sessionid,jdbcType=VARCHAR}
+      and tranid = #{tranid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pujjr.business.domain.TmpExportKey" >
+    insert into t_tmpexp (idx, sessionid, tranid
+      )
+    values (#{idx,jdbcType=INTEGER}, #{sessionid,jdbcType=VARCHAR}, #{tranid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pujjr.business.domain.TmpExportKey" >
+    insert into t_tmpexp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idx != null" >
+        idx,
+      </if>
+      <if test="sessionid != null" >
+        sessionid,
+      </if>
+      <if test="tranid != null" >
+        tranid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idx != null" >
+        #{idx,jdbcType=INTEGER},
+      </if>
+      <if test="sessionid != null" >
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="tranid != null" >
+        #{tranid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteBySessionid">
+  	delete from t_tmpexp where sessionid=#{sessionid}
+  </delete>
+</mapper>

@@ -1,6 +1,7 @@
 package com.pujjr.business.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pujjr.business.dao.LeasingAppMapper;
 import com.pujjr.business.dao.LeasingApproveMapper;
 import com.pujjr.business.dao.LeasingCheckMapper;
+import com.pujjr.business.dao.TmpExportMapper;
 import com.pujjr.business.domain.LeasingApp;
+import com.pujjr.business.domain.TmpExportKey;
 import com.pujjr.business.vo.AppData;
 import com.pujjr.business.vo.AppManageDetail;
 
@@ -25,7 +28,8 @@ public class LeasingAppService {
 	private LeasingCheckMapper leasingCheckDao;
 	@Autowired
 	private LeasingApproveMapper leasingApproveDao;
-	
+	@Autowired
+	private TmpExportMapper tmpExportDao;
 	public  LeasingApp get(String id)
 	{
 		return leasingAppDao.selectByPrimaryKey(id);
@@ -187,13 +191,38 @@ public class LeasingAppService {
 		return leasingAppDao.selectBranchAvailablyGpsLvl(branchId, rzje);
 	}
 	
-	public Map getOnApproveRecord(String id)
+	public List<Map> getOnApproveRecord(String sessionid)
 	{
-		return leasingAppDao.selectOnApproveRecord(id);
+		return leasingAppDao.selectOnApproveRecord(sessionid);
 	}
 	
-	public List<Map> getkhhzhzb(List<String> ids)
+	public List<Map> getkhhzhzb(String sessionid)
 	{
-		return leasingAppDao.selectkhhzhzb(ids);
+		return leasingAppDao.selectkhhzhzb(sessionid);
+	}
+	
+	public List<Map> getKhhkxxb(String sessionid)
+	{
+		return leasingAppDao.selectKhhkxxb(sessionid);
+	}
+	
+	public int deleteTmpExportBySessionid(String sessionid)
+	{
+		return tmpExportDao.deleteBySessionid(sessionid);
+	}
+	
+	public void saveTmpExports(String sessionid,String ids)
+	{
+		String[] sIds=(ids.substring(0, ids.length()-1)).split(",");
+		List<String> listIds=Arrays.asList(sIds);
+		for(String id:listIds)
+		{
+			String[] tmp=id.split(":");
+			TmpExportKey te=new TmpExportKey();
+			te.setSessionid(sessionid);
+			te.setIdx(Integer.valueOf(tmp[0]));
+			te.setTranid(tmp[1]);
+			tmpExportDao.insert(te);
+		}
 	}
 }
