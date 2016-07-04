@@ -1781,7 +1781,11 @@
 	a.reserver3,
 	a.rzqx,
 	a.fwf,
-	d.yhk
+	d.yhk,
+	a.gpsfee,
+	a.rzsxf,
+	a.reserver2 as jxsfy,
+    a.reserver3 as pgf
 	from t_leasing_app a
 	left join sys_branch b on a.jxsid=b.id
 	left join t_product d on a.producttype=d.productname and a.productname=d.productseq and a.rzqx=d.periods

@@ -582,7 +582,11 @@ public class LeasingAppController extends BaseController
 			double reserver3=item.containsKey("reserver3")?(Double)item.get("reserver3"):0;
 			double yhk=item.containsKey("yhk")?(Double)item.get("yhk"):0;
 			double fwf=item.containsKey("fwf")?(Double)item.get("fwf"):0;
-			double ygk=calygk(item.get("id").toString(),rzje,fwf,yhk,rzqx);
+			double rzsxf=item.containsKey("rzsxf")?(Double)item.get("rzsxf"):0;
+			double jxsfy=item.containsKey("jxsfy")?(Double)item.get("jxsfy"):0;
+			double pgf=item.containsKey("pgf")?(Double)item.get("pgf"):0;
+			double gpsfee=item.containsKey("gpsfee")?(Double)item.get("gpsfee"):0;
+			double fkje=calfkje(item.get("id").toString(),rzje,fwf,gpsfee,rzsxf,jxsfy,pgf);
 			DecimalFormat df=new DecimalFormat("#,###,###,###,##0.00");
 			DecimalFormat df1=new DecimalFormat("#.000000");
 			writeCellValue(wb,sheet,row,0,seq,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
@@ -594,7 +598,7 @@ public class LeasingAppController extends BaseController
 			writeCellValue(wb,sheet,row,6,refundbankno,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellValue(wb,sheet,row,7,refundacctno,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellAmount(wb,sheet,row,8,df.format(rzje),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
-			writeCellAmount(wb,sheet,row,9,df.format(ygk),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellAmount(wb,sheet,row,9,df.format(fkje),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
 			writeCellAmount(wb,sheet,row,10,df.format(rzqx),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);	
 			writeCellAmount(wb,sheet,row,11,df.format(reserver2),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);		
 		}
@@ -762,6 +766,33 @@ public class LeasingAppController extends BaseController
 			ygk=Math.round(rzje/10000*yhk);
 		}
 		return ygk;
+	}
+	private double calfkje(String appid,double rzje,double fwf,double gpsfee,double rzsxf,double jxsfy,double pgf)
+	{
+		double fkje=0.00;
+		int appdate=Integer.valueOf(appid.split("-")[1]);
+		if(appdate<20160618)
+		{
+			if(Double.compare(gpsfee, 0.00)>0)
+			{
+				fkje=Math.round(rzje-1998-fwf)-rzsxf;
+			}
+			else
+			{
+				fkje=Math.round(rzje-fwf)-rzsxf;
+			}
+			
+		}
+		else if(appdate>=20160618&&appdate<20160622)
+		{
+			fkje=Math.round(rzje-gpsfee+jxsfy-pgf);
+			
+		}
+		else
+		{
+			fkje=Math.round(rzje-gpsfee-pgf);
+		}
+		return fkje;
 	}
 	/**
 	 * 到处客户还款信息表
