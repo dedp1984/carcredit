@@ -223,6 +223,7 @@
   </sql>
   <select id="selectInCaseList" resultType="hashMap">
       	select 
+      	    a.id,
       		a.producttype,
       		a.productname,
       		a.ppcx,

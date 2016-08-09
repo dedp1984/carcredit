@@ -2,6 +2,7 @@ package com.pujjr;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import com.pujjr.business.service.KeyService;
 import com.pujjr.business.service.LeasingAppService;
 import com.pujjr.business.service.SequenceService;
 import com.pujjr.business.service.SysAccountService;
+import com.pujjr.business.service.WSSqlserverService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:conf/spring*.xml"})
@@ -29,6 +31,24 @@ public class SeqTest
 	private KeyService keyService;
 	@Autowired
 	private LeasingAppService leasingAppServ;
+	@Autowired
+	private WSSqlserverService wsServ;
+	@Test
+	public void testMultiDataSource()
+	{
+		List<HashMap<String,Object>> list = wsServ.sqlserverTest();
+		
+		for(int i=0;i<list.size();i++)
+		{
+			System.out.println(list.get(i).toString());
+		}
+		List<Map> list1=leasingAppServ.getInCaseList(null, null, null, null);
+		for(int i=0;i<list1.size();i++)
+		{
+			Map item=list1.get(i);
+			System.out.println(i+"-"+item.get("ygk"));
+		}
+	}
 	@Test
 	public void getInCaseList()
 	{
@@ -36,7 +56,7 @@ public class SeqTest
 		for(int i=0;i<list.size();i++)
 		{
 			Map item=list.get(i);
-			System.out.println(i+"-"+item.get("ygk"));
+			System.out.println(item.toString());
 		}
 	}
 	@Test

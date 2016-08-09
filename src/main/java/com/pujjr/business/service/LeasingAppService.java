@@ -155,10 +155,10 @@ public class LeasingAppService {
 		for(int i=0;i<size;i++)
 		{
 			Map item=list.get(i);
-			double rzje=(Double)item.get("rzje");
+			double rzje=item.containsKey("rzje")?(Double)item.get("rzje"):0;
 			double fwf=(Double)item.get("fwf");
-			double wyyhk=(Double)item.get("wyyhk");
-			int  rzqx=(Integer)item.get("rzqx");
+			double wyyhk=item.containsKey("wyygk")?(Double)item.get("wyyhk"):0;
+			int  rzqx=item.containsKey("rzje")?(Integer)item.get("rzqx"):0;
 			double ygk=Math.round((rzje-fwf)/10000*wyyhk+Math.ceil(fwf/rzqx));
 			item.put("ygk", ygk);
 			String hyzk=(String)item.get("hyzk");

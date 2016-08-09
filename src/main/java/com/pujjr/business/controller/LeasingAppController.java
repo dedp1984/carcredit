@@ -407,6 +407,7 @@ public class LeasingAppController extends BaseController
 		sheet.setColumnWidth(24, 4000);
 		sheet.setColumnWidth(25, 4000);
 		sheet.setColumnWidth(26, 4000);
+		sheet.setColumnWidth(27, 4000);
 		
 		Row row=sheet.createRow(0);
 		writeCellValue(wb,sheet,row,0,"序号",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
@@ -436,6 +437,7 @@ public class LeasingAppController extends BaseController
 		writeCellValue(wb,sheet,row,24,"附加条件",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		writeCellValue(wb,sheet,row,25,"审核员意见",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		writeCellValue(wb,sheet,row,26,"审批人一意见",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,27,"申请单号",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
 		
 		Font fontNormal=wb.createFont();		
 		fontNormal.setFontHeightInPoints((short)10);
@@ -473,6 +475,7 @@ public class LeasingAppController extends BaseController
 			String fkfjtj=item.containsKey("fkfjtj")?item.get("fkfjtj").toString():"";
 			String shyyj=item.containsKey("shyyj")?item.get("shyyj").toString():"";
 			String qxr1yj=item.containsKey("qxr1yj")?item.get("qxr1yj").toString():"";
+			String sqdh = item.containsKey("id")?item.get("id").toString():"";
 			writeCellValue(wb,sheet,row,0,seq,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,1,productType,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,2,productSerial,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
@@ -502,6 +505,7 @@ public class LeasingAppController extends BaseController
 			writeCellValue(wb,sheet,row,24,fkfjtj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,25,shyyj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,26,qxr1yj,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,27,sqdh,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			
 		}
 		
@@ -891,6 +895,82 @@ public class LeasingAppController extends BaseController
 							"评估报告出具时间",	
 							"备注"
 						 };
+		String[] hy={
+				"房地产开发经营",
+                "钢材生产及贸易",
+                "建筑/工程/劳务/施工",
+                "煤炭开采/洗选/商贸",
+                "装修行业",
+                "畜牧业养殖",
+                "纺织服装、鞋、帽、皮革、毛皮等生产制造",
+                "废弃资源和废旧材料回收及加工",
+                "化学原料及化学制品",
+                "通运输通信等设备仪器制造",
+                "金属制品生产制造",
+                "木材、家具加工制造",
+                "农副食品加工业",
+                "农作物生产/种植",
+                "石油加工、炼焦及核燃料加工",
+                "食品生产制造",
+                "水泥、瓦砖、玻璃、陶瓷建筑材料生产制造/石矿开采",
+                "文教体育用品制造",
+                "烟草制品",
+                "医药生产销售",
+                "大中型百货超级市场",
+                "化学产品批发零售",
+                "机械设备、五金交电及电子产品批发零售",
+                "家用电器及电子产品批发零售",
+                "矿产品、建材、化工产品批发零售",
+                "农畜产品批发零售",
+                "汽车、摩托车、燃料及零配件批发零售",
+                "日用百货批发批发零售",
+                "食品、饮料批发批发零售",
+                "文化、体育用品及器材批发零售",
+                "五金、家具及室内装修材料批发零售",
+                "医药及医疗器材批发零售",
+                "餐饮服务业",
+                "房地产中介服务",
+                "互联网信息及软件服务",
+                "计算机等电子设备服务",
+                "居民服务和其他服务",
+                "科学研究、技术服务和地质勘查服务",
+                "卫生、社会保障和社会福利服务",
+                "物业管理服务",
+                "住宿服务业",
+                "商业信息咨询及服务",
+                "国有银行、商业银行、城市乡镇银行、农村信用社等",
+                "融资租赁、财务公司、汽车金融等金融公司",
+                "小贷、担保、典当、P2P、理财投资等融资机构",
+                "证券、保险、基金、信托等金融公司",
+                "仓储行业",
+                "交通运输行业",
+                "物流行业",
+                "教育机构",
+                "体育和娱乐业",
+                "图书馆、档案馆、博物馆等",
+                "新闻、出版、广播、电视、电影和音像行业",
+                "金、银、铜等矿业",
+                "石油和天然气开采",
+                "电力、燃气及水的生产和供应",
+                "水利、环境和公共设施管理",
+                "国际组织",
+                "国家机构、事业单位",
+                "群众团体、社会团体和宗教组织"
+		};
+		String[] dwxz={
+				"自由职业",
+                "自雇人士",
+                "个体",
+                "私企",
+                "国家机关",
+                "事业单位",
+                "国企",
+                "外资",
+                "合资企业",
+                "上市企业",
+                "学校",
+                "教育机构",
+		};
 		Row row=sheet.createRow(0);
 		for(int i=0;i<colnames.length;i++)
 		{
@@ -912,11 +992,12 @@ public class LeasingAppController extends BaseController
 			String reserver5=item.containsKey("reserver5")?item.get("reserver5").toString():"";
 			String name=item.containsKey("name")?item.get("name").toString():"";
 			String idno=item.containsKey("idno")?item.get("idno").toString():"";
-			String czr1sshy=item.containsKey("czr1sshy")?item.get("czr1sshy").toString():"";
+			String czr1sshy=item.containsKey("czr1sshy")?hy[Integer.valueOf(item.get("czr1sshy").toString())]:"";
 			String czr1dwmc=item.containsKey("czr1dwmc")?item.get("czr1dwmc").toString():"";
 			String czr1dwdh=item.containsKey("czr1dwdh")?item.get("czr1dwdh").toString():"";
-			String czr1dwlx=item.containsKey("czr1dwlx")?item.get("czr1dwlx").toString():"";
+			String czr1dwlx=item.containsKey("czr1dwlx")?dwxz[Integer.valueOf(item.get("czr1dwlx").toString())-1]:"";
 			String czr1dwdz=item.containsKey("czr1dwdz")?item.get("czr1dwdz").toString():"";
+			String czr1zwmc = item.containsKey("czr1zwmc")?item.get("czr1zwmc").toString():"";
 			String xxxdz=item.containsKey("xxxdz")?item.get("xxxdz").toString():"";
 			String mobile=item.containsKey("mobile")?item.get("mobile").toString():"";
 			String lxr1name=item.containsKey("lxr1name")?item.get("lxr1name").toString():"";
@@ -970,7 +1051,7 @@ public class LeasingAppController extends BaseController
 			writeCellValue(wb,sheet,row,19,czr1dwdh,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellValue(wb,sheet,row,20,czr1dwlx,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellValue(wb,sheet,row,21,czr1dwdz,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
-			writeCellValue(wb,sheet,row,22,"",fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,22,czr1zwmc,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,23,xxxdz,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellValue(wb,sheet,row,24,"",fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 			writeCellValue(wb,sheet,row,25,mobile,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);

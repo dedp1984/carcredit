@@ -7,7 +7,7 @@
 	<!-- Spring和mybatis的配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:conf/spring-mybatis.xml,classpath:conf/spring-quartz.xml</param-value>
+		<param-value>classpath:conf/spring-mybatis.xml,classpath:conf/spring-quartz.xml,classpath:conf/spring-aop.xml</param-value>
 	</context-param>
 	<!-- 日志记录 -->
     <context-param>

@@ -19,21 +19,8 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:conf/jdbc.properties" />
 	</bean>
-
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
-		<property name="driverClassName">
-			<value>${jdbc_driverClassName}</value>
-		</property>
-		<property name="url">
-			<value>${jdbc_url}</value>
-		</property>
-		<property name="username">
-			<value>${jdbc_username}</value>
-		</property>
-		<property name="password">
-			<value>${jdbc_password}</value>
-		</property>
+	
+	<bean id="commonDataSource" class="com.alibaba.druid.pool.DruidDataSource" >
 		<!-- 连接池最大使用连接数 -->
 		<property name="maxActive">
 			<value>20</value>
@@ -65,6 +52,46 @@
 		<!-- 连接属性 -->
 		<property name="connectionProperties">
 			<value>clientEncoding=UTF-8</value>
+		</property>
+	</bean>
+
+	<bean id="dataSourceMysql" parent="commonDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc_driverClassName_mysql}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc_url_mysql}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc_username_mysql}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc_password_mysql}</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSourceSqlserver" parent="commonDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc_driverClassName_sqlserver}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc_url_sqlserver}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc_username_sqlserver}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc_password_sqlserver}</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="com.pujjr.multidatasource.ThreadLocalRoutingDataSource">
+		<property name="defaultTargetDataSource" ref="dataSourceMysql"></property>
+		<property name="targetDataSources">
+			<map key-type="com.pujjr.multidatasource.DataSources">
+				<entry key="SQLSERVER" value-ref="dataSourceSqlserver"></entry>
+				<entry key="MYSQL" value-ref="dataSourceMysql"></entry>
+			</map>
 		</property>
 	</bean>
 
