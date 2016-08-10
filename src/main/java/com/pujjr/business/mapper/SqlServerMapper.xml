@@ -1,7 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pujjr.business.dao.SqlServerMapper" >
-  	<select id="selectList" resultType="HashMap">
-  		select * from act_ru_job;
+  	<select id="selectInCaseList" resultType="HashMap">
+  		select 
+  		  	a1.[ApplicationNO] as id ,
+			pm.[ProductName] as productName ,
+			fi.[CarBrand1] as carBrandId ,  
+			vc.[CodeFullName]  as carDetail,
+			ci.[CustomerName]  as custName,
+			ci.[CustomerIDNO]  as custIdNo, 
+			a1.[CreateTeamID] as jxsId,
+			fi.[LoanAmount1] as rzje,
+			fi.[MonthlyPayAmount1] as ygk,
+			fi.[GPSFee1] as gpsfee1,
+			fi.[PurchaseTax1] as gzs1,
+			fi.[ServiceFee1] as fwf1,
+			fi.[FinancingPeriods1] as rzqs1,
+			pm1.[HandlingCharge] as rate,
+			fi.[MortgageRate1] sfbl,
+			dd1.[Value] as sqdzt ,
+			dd2.[Value] as hyzk,
+			a1.[SubmitDate] as submitDate   
+			FROM [AP].[ApplicationForm] a1
+			LEFT JOIN BS.[ProductMaster] pm on a1.[ProductID] = pm.[ProductID] 
+			LEFT JOIN BS.[ProductMaster] pm1 on pm.[ParentID] =pm1.[ProductID] 
+			LEFT JOIN [AP].[CustomerInfo] ci on a1.[ApplicationNO] = ci.[ApplicationNO] 
+			LEFT  JOIN [AP].[FinanceInfo] fi on a1.[ApplicationNO] = fi.[ApplicationNO] 
+			LEFT JOIN [BS].[VehicleConfiguration] vc  on fi.[CarBrand1] = vc.[Code] 
+			LEFT JOIN [BS].[DataDictionaryDetail] dd1 on a1.[Status] =dd1.[ItemID] 
+			LEFT JOIN [BS].[DataDictionaryDetail] dd2 on ci.[CustomerMarriageStatus] =dd2.[ItemID] 
+			where  CONVERT (VARCHAR (10), a1.[SubmitDate] ,120) =#{sqfqrq}
+  	</select>
+  	<select id="selectChargeBackList" resultType="HashMap">
+  		SELECT 
+  		t1.[ApplicationNO] appid,
+  		t5.CustomerName name,
+  		ISNULL(t2.Amount,0) fx,
+  		ISNULL(t3.Amount,0) lx,
+  		ISNULL(t4.Amount,0) bj,
+  		ISNULL(t1.TotalAmount,0) total,
+  		t1.RemnantPrincipal sybj 
+		FROM RP.GeneralAccount  t1 LEFT JOIN
+		RP.GeneralAccountDetail t2 ON t2.ApplicationNO = t1.ApplicationNO AND t2.ItemID=3 LEFT JOIN
+		RP.GeneralAccountDetail t3 ON t3.ApplicationNO = t1.ApplicationNO AND t3.ItemID=5 LEFT JOIN
+		RP.GeneralAccountDetail t4 ON t4.ApplicationNO = t1.ApplicationNO AND t4.ItemID=6 INNER JOIN
+		dbo.V_AP_ApplicationForm t5 ON t5.ApplicationNO = t1.ApplicationNO
+		WHERE t1.TotalAmount>0
+  	</select>
+  	<select id="selectCreditDataList" resultType="HashMap">
+  		SELECT 
+		a1.[SubmitDate] as sqfqsj,
+		a2.[CustomerName] as name,
+		a2.[CustomerIDNO] as idno,
+		a2.[CustomerMobileNO] as mobile,
+		a2.[CustomerQQ] as qq,
+		b1.[FullDivisionName]+a2.[CustomerResidenceAddressExt] as address,
+		a2.[CustomerUnitName] as dwmc,
+		a2.[CustomerUnitPhoneNO] as dwdh,
+		b2.[FullDivisionName]+a2.[CustomerUnitAddressExt] dwdz,
+		a3.[LoanAmount1] as rzje,
+		a3.[PurchaseTax1] as gzs ,
+		a3.[MortgageRate1] as sfbl
+		
+		
+		FROM [AP].[ApplicationForm] a1
+		
+		LEFT JOIN [AP].[CustomerInfo] a2 on a1.[ApplicationNO] =a2.[ApplicationNO] 
+		LEFT JOIN [AP].[FinanceInfo] a3 on a1.[ApplicationNO] =a3.[ApplicationNO] 
+		LEFT JOIN BS.[AdministrativeDivision] b1 on a2.[CustomerResidenceAddress] = b1.[Code] 
+		LEFT JOIN BS.[AdministrativeDivision] b2 on a2.[CustomerUnitAddress] = b2.[Code] 
+		where  CONVERT (VARCHAR (10), a1.[SubmitDate] ,120) =#{sqfqrq}
   	</select>
 </mapper>

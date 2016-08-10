@@ -14,7 +14,8 @@
     <aop:config>
     	<aop:pointcut expression="execution(* com.pujjr.business..WSSqlserverService.*(..))" id="lookupSqlserver"/>
     	<aop:aspect ref="dataSourceInterceptor">
-    		<aop:before pointcut-ref="lookupSqlserver" method="useSqlserver"/>
+    		<aop:before pointcut-ref="lookupSqlserver" method="beforeUseSqlserver"/>
+    		<aop:after-returning pointcut-ref="lookupSqlserver" method="afterUserSqlServer"/>
     	</aop:aspect>
     </aop:config>	
 </beans>

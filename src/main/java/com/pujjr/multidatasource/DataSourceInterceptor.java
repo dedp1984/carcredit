@@ -4,8 +4,13 @@ import org.springframework.stereotype.Component;
 
 public class DataSourceInterceptor 
 {
-	public void useSqlserver()
+	public void beforeUseSqlserver()
 	{
 		DataSourceManager.set(DataSources.SQLSERVER);
+	}
+	
+	public void afterUserSqlServer()
+	{
+		DataSourceManager.reset();
 	}
 }
