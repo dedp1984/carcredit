@@ -62,7 +62,17 @@ public class WSXDController extends BaseController
 	{
 		return wssqlServ.getChargeBackList();
 	}
-	
+	@RequestMapping("/api/queryCustRepay")
+	public List<HashMap<String,Object>> queryCustRepay(String qyrq) throws Exception 
+	{
+		if(qyrq!=null && qyrq!="")
+		{
+			qyrq = qyrq.replace("Z", " UTC");//注意是空格+UTC
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");//注意格式化的表达式
+			qyrq=Utils.getFormatDate(format.parse(qyrq), "yyyy-MM-dd");
+		}
+		return wssqlServ.getCustRepayList(qyrq);
+	}
 	private void  writeCellValue(Workbook wb,Sheet sheet,Row row,int colNum,String value,Font font,short color,short align)
 	{
 		Cell cell=row.createCell(colNum);
@@ -300,6 +310,116 @@ public class WSXDController extends BaseController
 			writeCellAmount(wb,sheet,row,10,df.format(sfbl.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
 			writeCellValue(wb,sheet,row,11,df.format(rzje.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
 			writeCellValue(wb,sheet,row,12,df.format(gzs.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);	
+		}
+		
+		String fileName=Utils.get16UUID();
+		String filePath=session.getServletContext().getRealPath("/")+"download"+File.separator+fileName+".xls";
+		FileOutputStream fileOut = new FileOutputStream(filePath);   
+		wb.write(fileOut);
+		HttpHeaders headers = new HttpHeaders();  
+	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);  
+	    headers.setContentDispositionFormData("attachment", new String("申请单明细".getBytes("GB2312"), "ISO_8859_1")+".xls");  
+	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(new File(filePath)),  
+	                                      headers, HttpStatus.OK);  
+		
+	}
+	
+	@RequestMapping("/api/fkmxdata/export")
+	public ResponseEntity<byte[]> exportFkmxData( String fkrq, HttpSession session) throws Exception
+	{
+		if(fkrq!=null && fkrq!="")
+		{
+			fkrq = fkrq.replace("Z", " UTC");//注意是空格+UTC
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");//注意格式化的表达式
+			fkrq=Utils.getFormatDate(format.parse(fkrq), "yyyy-MM-dd");
+		}
+		
+		List<HashMap<String,Object>> list=wssqlServ.getFkmxList(fkrq);
+		
+		Workbook wb=new HSSFWorkbook();
+		Sheet sheet=wb.createSheet();
+		cellStyleCache=new CellStyleCache(wb);
+		Font font=wb.createFont();
+		font.setFontHeightInPoints((short)10);
+		font.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
+		
+		sheet.setColumnWidth(0, 5000);
+		sheet.setColumnWidth(1, 3000);
+		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(3, 5500);
+		sheet.setColumnWidth(4, 5000);
+		sheet.setColumnWidth(5, 5000);
+		sheet.setColumnWidth(6, 15000);
+		sheet.setColumnWidth(7, 8000);
+		sheet.setColumnWidth(8, 5000);
+		sheet.setColumnWidth(9, 15000);
+		sheet.setColumnWidth(10, 2500);
+		sheet.setColumnWidth(11, 4000);
+		sheet.setColumnWidth(12, 4000);
+		sheet.setColumnWidth(13, 4000);
+		sheet.setColumnWidth(14, 4000);
+		sheet.setColumnWidth(15, 4000);
+		Row row=sheet.createRow(0);
+		writeCellValue(wb,sheet,row,0,"申请ID",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,1,"姓名",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,2,"身份证号",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,3,"裸车价",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,4,"保险费",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,5,"融资手续费",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,6,"评估价",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,7,"GPS费",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,8,"服务费",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,9,"合同金额",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,10,"期限",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,11,"利率",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,12,"月供",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,13,"产品类型",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,14,"首付比例",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		writeCellValue(wb,sheet,row,15,"手机号码",font,IndexedColors.GREY_25_PERCENT.getIndex(),CellStyle.ALIGN_CENTER);
+		
+		Font fontNormal=wb.createFont();		
+		fontNormal.setFontHeightInPoints((short)10);
+		
+		for(int i=0;i<list.size();i++)
+		{
+			row=sheet.createRow(i+1);
+			HashMap<String,Object> item=list.get(i);
+			String appid = item.containsKey("appid")?item.get("appid").toString():"";
+			String name = item.containsKey("name")?item.get("name").toString():"";
+			String idno = item.containsKey("idno")?item.get("idno").toString():"";
+			String productName = item.containsKey("productName")?item.get("productName").toString():"";
+			
+			BigDecimal lcj=(BigDecimal) (item.containsKey("lcj")?(BigDecimal)item.get("lcj"):BigDecimal.valueOf(0.00));
+			BigDecimal bxf=(BigDecimal) (item.containsKey("bxf")?(BigDecimal)item.get("bxf"):BigDecimal.valueOf(0.00));
+			BigDecimal gzs=(BigDecimal) (item.containsKey("gzs")?(BigDecimal)item.get("gzs"):BigDecimal.valueOf(0.00));
+			BigDecimal pgj=(BigDecimal) (item.containsKey("pgj")?(BigDecimal)item.get("pgj"):BigDecimal.valueOf(0.00));
+			BigDecimal gpsfee=(BigDecimal) (item.containsKey("gpsfee")?(BigDecimal)item.get("gpsfee"):BigDecimal.valueOf(0.00));
+			BigDecimal fwf=(BigDecimal) (item.containsKey("fwf")?(BigDecimal)item.get("fwf"):BigDecimal.valueOf(0.00));
+			BigDecimal htje=(BigDecimal) (item.containsKey("htje")?(BigDecimal)item.get("htje"):BigDecimal.valueOf(0.00));
+			int qs = (Integer)(item.containsKey("qs")?item.get("qs"):0);
+			BigDecimal lv=(BigDecimal) (item.containsKey("lv")?(BigDecimal)item.get("lv"):BigDecimal.valueOf(0.00));
+			BigDecimal sfbl=(BigDecimal) (item.containsKey("sfbl")?(BigDecimal)item.get("sfbl"):BigDecimal.valueOf(0.00));
+			BigDecimal ygk=(BigDecimal) (item.containsKey("ygk")?(BigDecimal)item.get("ygk"):BigDecimal.valueOf(0.00));
+			String mobile = item.containsKey("mobile")?item.get("mobile").toString():"";
+			writeCellValue(wb,sheet,row,0,appid,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
+			writeCellValue(wb,sheet,row,1,name,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellValue(wb,sheet,row,2,idno,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			
+			DecimalFormat df=new DecimalFormat("#,###,###,###,##0.0000");
+			
+			writeCellAmount(wb,sheet,row,3,df.format(lcj.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
+			writeCellAmount(wb,sheet,row,4,df.format(bxf.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellAmount(wb,sheet,row,5,df.format(gzs.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);	
+			writeCellAmount(wb,sheet,row,6,df.format(pgj.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);	
+			writeCellAmount(wb,sheet,row,7,df.format(gpsfee.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_LEFT);
+			writeCellAmount(wb,sheet,row,8,df.format(fwf.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellAmount(wb,sheet,row,9,df.format(htje.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);	
+			writeCellValue(wb,sheet,row,10,String.valueOf(qs),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellAmount(wb,sheet,row,11,df.format(lv.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellAmount(wb,sheet,row,12,df.format(ygk.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellValue(wb,sheet,row,13,productName,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
+			writeCellAmount(wb,sheet,row,14,df.format(sfbl.doubleValue()),fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_RIGHT);
+			writeCellValue(wb,sheet,row,15,mobile,fontNormal,IndexedColors.WHITE.getIndex(),CellStyle.ALIGN_CENTER);
 		}
 		
 		String fileName=Utils.get16UUID();

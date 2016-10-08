@@ -71,4 +71,123 @@
 		LEFT JOIN BS.[AdministrativeDivision] b2 on a2.[CustomerUnitAddress] = b2.[Code] 
 		where  CONVERT (VARCHAR (10), a1.[SubmitDate] ,120) =#{sqfqrq}
   	</select>
+  	<select id="selectCustRepayList" resultType="HashMap">
+  		select 
+
+		a1.[ApplicationNO],
+		pm1.[ProductName],
+		s1.[ContractNO] ,
+		dd.[Value] ,
+		li.[PayDate] ,
+		ci.[CustomerName] ,
+		ci.[CustomerIDNO] ,
+		fi.[NakedcarPrice1] ,
+		fi.[InsuranceFee1] ,
+		fi.[PurchaseTax1] ,
+		fi.[GPSFee1] ,
+		fi.[FinanceAmount1] ,
+		fi.[ServiceFee1] ,
+		s1.[LoanAmount] ,
+		s1.[Periods] ,
+		lr.[InterestRate] ,
+		dd1.[Value] ,
+		rp.[TotalAmount] ,
+		li.[AccountName] ,
+		li.[SubBranch] ,
+		li.[AccountNO] ,
+		gs.[SupplierName] ,
+		s1.[FrontGPSCode1] ,
+		s1.[BackGPSCode1] 
+		FROM AP.[ApplicationForm] a1  
+		
+		LEFT JOIN BS.[ProductMaster] pm on a1.[ProductID] = pm.[ProductID] 
+		LEFT JOIN BS.[ProductMaster] pm1 on pm.[ParentID] =pm1.[ProductID] 
+		LEFT JOIN [SC].[SignContractInfo] s1 on a1.[ApplicationNO] = s1.[ApplicationNO] and s1.[IsValid] =1
+		LEFT JOIN [AU].[AuditMaster] am on a1.[ApplicationNO] =am.[ApplicationNO] and am.[IsValid] =1
+		LEFT JOIN [AU].[AuditScore]  aus on am.[ID] =aus.[AuditMasterID] 
+		LEFT JOIN  BS.[DataDictionaryDetail] dd on aus.[CustomerType] =dd.[ItemID] 
+		LEFT JOIN [LO].[LoanInfo]  li on li.[ApplicationNO] =a1.[ApplicationNO] 
+		LEFT JOIN [AP].[CustomerInfo] ci on a1.[ApplicationNO] = ci.[ApplicationNO] 
+		LEFT JOIN [AP].[FinanceInfo] fi on a1.[ApplicationNO] =fi.[ApplicationNO] 
+		LEFT JOIN [SC].[LoanRate] lr on a1.[ApplicationNO] = lr.[ApplicationNO] 
+		LEFT JOIN [BS].[DataDictionaryDetail] dd1 on dd1.[ItemID] = pm.[RepayMode] 
+		LEFT JOIN [BS].[BankBaseInfo] bi on bi.[BankID] = li.[Bank] 
+		LEFT JOIN [BS].[GPSSupplier]  gs on s1.[SupplierId1] =gs.[SupplierId] 
+		LEFT JOIN [RP].[RepaymentPlan] rp on rp.[ApplicationNO] =a1.[ApplicationNO] and rp.[Period] =1
+		
+		where a1.[CreateDate] >= '20160807'  and a1.[Status] ='042012' and CONVERT (VARCHAR (10), li.[PayDate]  ,120) =#{qyrq}
+  		
+  	</select>
+  	
+  	<select id="selectFkmxList" resultType="HashMap">
+  		select 
+		a1.[ApplicationNO] as appid,
+		ci.[CustomerName] as name ,
+		ci.[CustomerMobileNO] as mobile,
+		ci.[CustomerIDNO] as idno,
+		pm1.[ProductName] as productName,
+		fi.[NakedcarPrice1] as lcj,
+		fi.[InsuranceFee1]  as bxf,
+		fi.[PurchaseTax1]  as gzs,
+		fi.[SalePrice1]  as pgj,
+		fi.[GPSFee1]  as gpsfee,
+		fi.[ServiceFee1]  as fwf,
+		s1.[LoanAmount]  as htje,
+		s1.[Periods]  as qs ,
+		lr.[InterestRate] as lv ,
+		dd1.[Value]  as hkfs,
+		fi.[MortgageRate1]  as sfbl,
+		rp.[TotalAmount] as ygk ,
+		li.[AccountName] ,
+		li.[SubBranch] ,
+		li.[AccountNO] ,
+		gs.[SupplierName] ,
+		s1.[FrontGPSCode1] ,
+		s1.[BackGPSCode1] 
+		FROM AP.[ApplicationForm] a1  
+		
+		LEFT JOIN BS.[ProductMaster] pm on a1.[ProductID] = pm.[ProductID] 
+		LEFT JOIN BS.[ProductMaster] pm1 on pm.[ParentID] =pm1.[ProductID] 
+		
+		LEFT JOIN [SC].[SignContractInfo] s1 on a1.[ApplicationNO] = s1.[ApplicationNO] and s1.[IsValid] =1
+		
+		LEFT JOIN [AU].[AuditMaster] am on a1.[ApplicationNO] =am.[ApplicationNO] and am.[IsValid] =1
+		
+		LEFT JOIN [AU].[AuditScore]  aus on am.[ID] =aus.[AuditMasterID] 
+		
+		LEFT JOIN  BS.[DataDictionaryDetail] dd on aus.[CustomerType] =dd.[ItemID] 
+		
+		LEFT JOIN [LO].[LoanInfo]  li on li.[ApplicationNO] =a1.[ApplicationNO] 
+		LEFT JOIN [AP].[CustomerInfo] ci on a1.[ApplicationNO] = ci.[ApplicationNO] 
+		LEFT JOIN [AP].[FinanceInfo] fi on a1.[ApplicationNO] =fi.[ApplicationNO] 
+		LEFT JOIN [SC].[LoanRate] lr on a1.[ApplicationNO] = lr.[ApplicationNO] 
+		LEFT JOIN [BS].[DataDictionaryDetail] dd1 on dd1.[ItemID] = pm.[RepayMode] 
+		LEFT JOIN [BS].[BankBaseInfo] bi on bi.[BankID] = li.[Bank] 
+		LEFT JOIN [BS].[GPSSupplier]  gs on s1.[SupplierId1] =gs.[SupplierId] 
+		LEFT JOIN [RP].[RepaymentPlan] rp on rp.[ApplicationNO] =a1.[ApplicationNO] and rp.[Period] =1
+		
+		where a1.[CreateDate] >= '20160807'  and a1.[Status] ='042012' 
+		<if test="fkrq != null and fkrq!=''">
+			and CONVERT (VARCHAR (10), li.[PayDate]  ,120) =#{fkrq}
+		</if>
+  	</select>
+  	<select id="selectCustomerInfo" resultType="HashMap">
+  		select ApplicationNO,CustomerIDNO,CustomerMobileNO from AP.CustomerInfo
+  	</select>
+  	<update id="updateCustomerInfo" parameterType="HashMap">
+  		update AP.CustomerInfo 
+  		set CustomerIDNO = #{CustomerIDNO},CustomerMobileNO =#{CustomerMobileNO}
+  		where ApplicationNO = #{ApplicationNO}
+  		
+  	</update>
+  	
+  	<select id="selectContactInfo" resultType="HashMap">
+  		select * from  AP.CustomerContact
+  	</select>
+  	
+  	<update id="updateContactTelInfo">
+  		update AP.CustomerContact 
+  		set Contact1MobileNO = #{tel}
+  		where ApplicationNO = #{appId}
+  	</update>
 </mapper>

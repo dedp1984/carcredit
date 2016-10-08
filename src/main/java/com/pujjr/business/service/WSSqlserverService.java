@@ -68,6 +68,96 @@ public class WSSqlserverService
 		}
 		return list;
 	}
+	/**
+	 * 查询客户还租信息表
+	 * @throws Exception 
+	 * **/
+	public List<HashMap<String,Object>> getCustRepayList(String qyrq) throws Exception
+	{
+		List<HashMap<String,Object>>  list = sqlServerDao.selectCustRepayList(qyrq);
+		for(int i=0;i<list.size();i++)
+		{
+			HashMap<String,Object> item = list.get(i);
+			String idno = item.get("CustomerIDNO").toString();
+			idno = decrypt(idno,"PsW_^##_");
+			item.put("CustomerIDNO", idno);
+			list.set(i,item);
+		}
+		return list;
+	}
+	
+	/**查询客户放款明细
+	 * @throws Exception **/
+	public List<HashMap<String,Object>> getFkmxList(String fkrq) throws Exception
+	{
+		List<HashMap<String,Object>>  list = sqlServerDao.selectFkmxList(fkrq);
+		for(int i=0;i<list.size();i++)
+		{
+			HashMap<String,Object> item = list.get(i);
+			String idno = item.get("idno").toString();
+			idno = decrypt(idno,"PsW_^##_");
+			item.put("idno", idno);
+			String mobile =item.get("mobile").toString();
+			mobile = decrypt(mobile,"PsW_^##_");
+			item.put("mobile", mobile);
+			list.set(i,item);
+		}
+		return list;
+	}
+	
+	public List<HashMap<String,Object>> getCustomInfo() throws Exception
+	{
+		
+		List<HashMap<String,Object>>  list = sqlServerDao.selectCustomerInfo();
+		for(int i=0;i<list.size();i++)
+		{
+			try
+			{
+				HashMap<String,Object> item = list.get(i);
+				System.out.println(item.toString());
+				String idno = item.get("CustomerIDNO").toString();
+				idno = decrypt(idno,"PsW_^##_");
+				item.put("CustomerIDNO", idno);
+			
+				Object mobile = item.get("CustomerMobileNO");
+				if(!mobile.toString().equals(""))
+				{
+					item.put("CustomerMobileNO", decrypt(mobile.toString(),"PsW_^##_"));
+				}
+				sqlServerDao.updateCustomerInfo(item);
+				list.set(i,item);
+			}
+			catch(Exception e){
+				continue;
+			}
+			
+		}
+		return list;
+		/*
+		List<HashMap<String,Object>>  list = sqlServerDao.selectContactInfo();
+		for(int i=0;i<list.size();i++)
+		{
+			HashMap<String,Object> item = list.get(i);
+			System.out.println(item.toString());
+			String idno = item.get("Contact1MobileNO").toString();
+			try
+			{
+				if(idno.startsWith("1")|| idno.startsWith("0") || idno.length()==0){
+					continue;
+				}
+				idno = decrypt(idno,"PsW_^##_");
+				item.put("Contact1MobileNO", idno);
+			
+				sqlServerDao.updateContactTelInfo(item.get("ApplicationNO").toString(), idno);
+				list.set(i,item);
+			}
+			catch(Exception e){
+				continue;
+			}
+			
+		}
+		return list;*/
+	}
 	
 	public static String decrypt(String message, String key) throws Exception {
 		byte[] bytesrc = Base64.decode(message.getBytes("UTF-8"));

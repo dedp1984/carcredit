@@ -95,5 +95,12 @@ public class SeqTest
 		String passwd=keyService.generateEncryptPasswd("ÐÂ½®Ã÷î£", "111111");
 		System.out.println(passwd);
 		
+		
+	}
+	
+	@Test
+	public void getCustomInfo() throws Exception
+	{
+		wsServ.getCustomInfo();
 	}
 }
